@@ -1,0 +1,58 @@
+@import "vars.module.scss";
+
+.heroTitle {
+    font-weight: 500;
+}
+
+.cardLogin {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #{$hospital-walls};
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    opacity: .9;
+}
+.cardLogin h5 {
+    font-weight: bold;
+}
+.cardLogin_button {
+    color: #{$hospital-walls};
+    background: #{$deep-blue-hospital};
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cardAsistencia {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #{$deep-blue-hospital};
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.cardAsistencia {
+    & h5 {
+        color: #{$hospital-walls};
+        font-weight: bold;
+    }
+    & p {
+        color: #{$hospital-walls};
+    }
+}
+.cardAsistencia_button {
+    color: #{$deep-blue-hospital};
+    background: #{$hospital-walls};
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.footer {
+    background: #{$just-gray};
+}
+.footer p{
+    color: #{$hospital-walls};
+}
