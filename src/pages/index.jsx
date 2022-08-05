@@ -26,7 +26,7 @@ function Copyright() {
   );
 }
 
-let id = JSON.stringify({id: 1, name: 'John Doe'});
+let id = JSON.stringify({ id: 1, name: 'John Doe' });
 
 const theme = createTheme();
 
@@ -85,9 +85,11 @@ export default function Home() {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button className={styles.cardLogin_button} variant="contained">
-                      <Link href="/login" underline="none">Iniciar Sesión</Link>
-                      </Button>
+                      <Link href="/login" underline="none">
+                        <Button className={styles.cardLogin_button} variant="contained">
+                          Iniciar Sesión
+                        </Button>
+                      </Link>
                     </CardActions>
                   </Card>
                 </Grid>
@@ -102,9 +104,11 @@ export default function Home() {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button className={styles.cardAsistencia_button} variant="contained">
-                        <Link href={`/about/${id}`} underline="none">Entrar</Link>
-                      </Button>
+                      <Link href={'/'} underline="none">
+                        <Button className={styles.cardAsistencia_button} variant="contained">
+                          Entrar
+                        </Button>
+                      </Link>
                     </CardActions>
                   </Card>
                 </Grid>

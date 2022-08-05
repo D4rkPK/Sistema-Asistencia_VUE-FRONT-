@@ -99,14 +99,16 @@ export default function login() {
                 id="password"
                 autoComplete="current-password"
               />
-              <Button className={styles.login}
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Iniciar Sesión
-              </Button>
+              <Link href="/dashboard" variant="body2">
+                <Button className={styles.login}
+                  
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Iniciar Sesión
+                </Button>
+              </Link>
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
