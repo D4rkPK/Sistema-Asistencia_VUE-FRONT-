@@ -9,8 +9,7 @@ export default {
     return {
       error: null,
       loading: false,
-      show1: false,
-      valid: true,
+      showPass: false,
       login: {
         user: "",
         password: ""
@@ -33,24 +32,27 @@ export default {
     },
 
     async recaptcha_response(token) {
-
+      if (this.$refs.form.validate()) {
       if (token != null) {
         this.loading = true;
         await this.services.authService.login(this.login)
           .then(async (r) => {
             console.log(this.login, "LOGIN");
+            console.log(r.data, "RESPONSE");
             await this.setSessionData(r.data.data);
             await this.setHeaders(r.data.data);
             this.loading = false;
             this.$router.push('/dashboard');
+            this.$toast.success('Bienvenido');
           })
           .catch((e) => {
             this.loading = false;
+            this.login.password = "";
             if (e.response) {
-              this.$toast.error(e.response.data.message, { position: 'top-center' });
+              this.$toast.error(e.response.data.message);
             }
           });
-
+        }
       }
     },
 
