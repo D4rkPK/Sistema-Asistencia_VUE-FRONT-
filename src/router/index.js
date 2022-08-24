@@ -26,7 +26,24 @@ const routes = [
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: Dashboard
+    component: Dashboard,
+/*     children: [
+      {
+        path: '',
+        name: 'spmi_inicio',
+        component: spmi_inicio
+      },
+      {
+        path: 'ingreso_presentacion',
+        name: 'ingreso_presentacion',
+        component: spmi_ingreso_presentacion
+      },
+      {
+        path: 'calendario_presentacion',
+        name: 'calendario_presentacion',
+        component: spmi_calendario
+      },
+    ] */
   },
 ]
 

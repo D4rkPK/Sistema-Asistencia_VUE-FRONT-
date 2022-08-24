@@ -18,7 +18,7 @@
             dark
             filled
             dense
-            v-model="login.user"
+            v-model="login.cui"
             :rules="[(value) => !!value || 'El usuario es requerido.']"
           ></v-text-field>
 
