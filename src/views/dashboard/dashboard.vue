@@ -1,90 +1,40 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer 
+    <v-navigation-drawer
       v-if="mostrarLateral"
       v-model="drawer"
       app
       :mini-variant="mini"
-      style="position: fixed; top: 0; left: 0; background-color: var(--hospital-pants)"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: var(--just-gray);
+      "
     >
       <template v-slot:prepend>
         <v-list-item>
-          <strong style="text-align: center">HOSPITAL REGIONAL DE ZACAPA</strong>
-          <v-img
-            style="content: var(--logo)" 
-            max-width="30%" 
-          ></v-img>
-        </v-list-item>
-        <div class="accordion-item accordion-flush" style="background-color: var(--hospital-pants)">
-          <h2 class="accordion-header" id="headingTwo">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseTwo"
-              aria-expanded="false"
-              aria-controls="collapseTwo"
-              style="background-color: var(--hospital-pants)"
-            >
-              <strong style="margin: 0 auto;">
-                <span>{{ userLogged.nombre + " " }}</span>
-                <span>{{ userLogged.apellido }}</span>
-              </strong>
-            </button>
-          </h2>
-          <div
-            id="collapseTwo"
-            class="accordion-collapse collapse show"
-            aria-labelledby="headingTwo"
-            data-bs-parent="#accordionExample"
+          <strong style="text-align: center; color: var(--white);" 
+            >HOSPITAL REGIONAL DE ZACAPA</strong
           >
-            <div class="accordion-body">
-              <div class="text-center">
-                <v-list-item-avatar
-                  style="margin: 0 auto"
-                  width="150"
-                  height="150"
-                >
-                  <v-avatar size="150">
-                    <img
-                      width="150"
-                      height="150"
-                      :src="
-                        'https://ui-avatars.com/api/?name=' +
-                        userLogged.nombre +
-                        '+' +
-                        userLogged.apellido
-                      "
-                      :alt="userLogged.nombre + '+' + userLogged.apellido"
-                    />
-                  </v-avatar>
-                </v-list-item-avatar>
-              </div>
-              <br />
-              <hr />
-              <span><strong>CUI: </strong>{{ userLogged.cui }}</span>
-              <br />
-              <span
-                ><strong>Puesto: </strong>
-                {{ userLogged.puesto.descripcion }}
-              </span>
-              <br />
-              <span
-                ><strong>Area: </strong>
-                {{ userLogged.area.descripcion }}
-              </span>
-            </div>
-          </div>
-        </div>
+          <v-img style="content: var(--logo)" max-width="30%"></v-img>
+        </v-list-item>
+                  <v-divider class="mt-0"></v-divider>
+        <v-list-item><v-spacer></v-spacer></v-list-item>
       </template>
 
       <!-- MENU LATERAL -->
-      <v-list nav dense color="var(--hospitall-pants)">
+
+      <v-list nav dense>
         <v-list-item-group v-model="group">
-            <v-list-item v-for="(i, key) in menus" :key="key" @click="pushRoute(i.path)">
-              <v-icon class="me-2">{{ i.icono }}</v-icon>
-              <span>{{ i.nombre }}</span> 
-            </v-list-item>
+          <v-list-item dark
+            v-for="(i, key) in menus"
+            :key="key"
+            @click="pushRoute(i.path)"
+          >
+            <v-icon class="me-2">{{ i.icono }}</v-icon>
+            <span>{{ i.nombre }}</span>
+          </v-list-item>
         </v-list-item-group>
       </v-list>
 
@@ -102,7 +52,7 @@
         </v-list-item> -->
 
         <!-- CERRAR SESION -->
-        <v-list-item
+        <v-list-item dark
           class="animated fadeInLeft zoomMenu"
           @click="cerrarSesion()"
         >
@@ -119,7 +69,7 @@
     <!-- MENU BARRA -->
     <v-app-bar
       app
-      color="var(--deep-blue-hospital)"
+      color="var(--just-gray )"
       class="text-white p-0"
       elevation="5"
       v-bind="size"
@@ -163,9 +113,31 @@
       </v-tooltip>
 
       <v-spacer></v-spacer>
+      <div class="text-center">
+        <strong style="margin: 0 auto">
+          <span>{{ userLogged.nombre + " " }}</span>
+          <span>{{ userLogged.apellido }}</span>
+        </strong>
+        <br />
+        <span>
+          {{ userLogged.puesto.descripcion }}
+        </span>
+        <span> | {{ userLogged.area.descripcion }} </span>
+      </div>
+      <v-avatar class="ml-5" size="40">
+        <v-img
+          :src="
+            'https://ui-avatars.com/api/?name=' +
+            userLogged.nombre +
+            '+' +
+            userLogged.apellido
+          "
+          :alt="userLogged.nombre + '+' + userLogged.apellido"
+        ></v-img>
+      </v-avatar>
     </v-app-bar>
 
-    <v-main style="background-color: var(--hospital-walls)">
+    <v-main>
       <!-- CONTENIDO -->
       <v-container fluid>
         <!-- GESTIONA LAS RUTAS HIJAS DEFINIDAS EN ROUTER -->
@@ -174,11 +146,18 @@
     </v-main>
     <!-- FOOTER -->
     <v-footer :padless="true">
-      <v-card flat tile width="100%" color="var(--just-gray)" class="text-center">
+      <v-card
+        flat
+        tile
+        width="100%"
+        color="var(--just-gray)"
+        class="text-center"
+      >
         <v-card-text class="white--text">
-          <strong> ACDP | Copyright © Universidad Mariano Galvez de Guatemala {{ new Date().getFullYear() }}
-          </strong
-          >
+          <strong>
+            ACDP | Copyright © Universidad Mariano Galvez de Guatemala
+            {{ new Date().getFullYear() }}
+          </strong>
         </v-card-text>
       </v-card>
     </v-footer>

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div>
     <div class="row justify-content-center">
       <div class="col-md-12">
         <v-alert
@@ -86,7 +86,7 @@
     </div>
 
     <!-- DIALOG editar o crear -->
-<!--     <v-dialog v-model="dialog" persistent max-width="1000px">
+    <!--     <v-dialog v-model="dialog" persistent max-width="1000px">
       <v-card>
         <v-form ref="form">
           <v-card-title>
@@ -196,7 +196,7 @@
     </v-dialog> -->
 
     <!-- Dialog confirmacion -->
-<!--     <v-dialog v-model="dialogConfirm" persistent max-width="300px">
+    <!--     <v-dialog v-model="dialogConfirm" persistent max-width="300px">
       <v-card>
         <v-card-title class="text-h5">
           Esta seguro que desea eliminar este usuario
@@ -217,7 +217,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog> -->
-  </v-container>
+  </div>
 </template>
 
 <script src="./practicantes.js"></script>

@@ -1,11 +1,11 @@
 <template>
-  <v-container>
+  <div>
     <div class="row justify-content-center">
       <div class="col-md-12">
         <v-alert
           color="var(--hospital-blues)"
           dark
-          border="top"
+          border="left"
           transition="scale-transition"
           class="text-center fs-2"
         >
@@ -13,6 +13,6 @@
         </v-alert>
       </div>
     </div>
-  </v-container>
+  </div>
 </template>
 <script src="./justificaciones.js"></script>
