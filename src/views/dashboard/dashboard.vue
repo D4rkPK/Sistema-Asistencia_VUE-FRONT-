@@ -1,20 +1,21 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer
+    <v-navigation-drawer 
       v-if="mostrarLateral"
       v-model="drawer"
       app
       :mini-variant="mini"
-      style="position: fixed; top: 0; left: 0"
+      style="position: fixed; top: 0; left: 0; background-color: var(--hospital-pants)"
     >
       <template v-slot:prepend>
         <v-list-item>
+          <strong style="text-align: center">HOSPITAL REGIONAL DE ZACAPA</strong>
           <v-img
-            style="content: var(--logoMEM)"
-            @click="redirectInicio()"
+            style="content: var(--logo)" 
+            max-width="30%" 
           ></v-img>
         </v-list-item>
-        <div class="accordion-item accordion-flush">
+        <div class="accordion-item accordion-flush" style="background-color: var(--hospital-pants)">
           <h2 class="accordion-header" id="headingTwo">
             <button
               class="accordion-button collapsed"
@@ -23,8 +24,9 @@
               data-bs-target="#collapseTwo"
               aria-expanded="false"
               aria-controls="collapseTwo"
+              style="background-color: var(--hospital-pants)"
             >
-              <strong style="margin: 0 auto">
+              <strong style="margin: 0 auto;">
                 <span>{{ userLogged.nombre + " " }}</span>
                 <span>{{ userLogged.apellido }}</span>
               </strong>
@@ -64,7 +66,7 @@
               <br />
               <span
                 ><strong>Puesto: </strong>
-                {{ userLogged.puesto.nombre_puesto }}
+                {{ userLogged.puesto.descripcion }}
               </span>
               <br />
               <span
@@ -77,7 +79,7 @@
       </template>
 
       <!-- MENU LATERAL -->
-      <v-list nav dense>
+      <v-list nav dense color="var(--hospitall-pants)">
         <v-list-item-group v-model="group">
             <v-list-item v-for="(i, key) in menus" :key="key" @click="pushRoute(i.path)">
               <v-icon class="me-2">{{ i.icono }}</v-icon>
@@ -117,12 +119,13 @@
     <!-- MENU BARRA -->
     <v-app-bar
       app
-      class="blue darken-4 text-white p-0"
+      color="var(--deep-blue-hospital)"
+      class="text-white p-0"
       elevation="5"
       v-bind="size"
     >
       <v-img
-        style="magin-left: -1px; cursor: pointer; content: var(--logoMEM)"
+        style="magin-left: -1px; cursor: pointer; content: var(--logo)"
         max-height="100"
         max-width="240"
         contain
@@ -153,7 +156,7 @@
             v-bind="attrs"
             v-on="on"
             @click="selectionUserItems('/dashboard')"
-            >radio_button_checked
+            >home
           </v-icon>
         </template>
         <span>Menu Principal</span>
@@ -162,7 +165,7 @@
       <v-spacer></v-spacer>
     </v-app-bar>
 
-    <v-main style="background-color: #f7f7f7">
+    <v-main style="background-color: var(--hospital-walls)">
       <!-- CONTENIDO -->
       <v-container fluid>
         <!-- GESTIONA LAS RUTAS HIJAS DEFINIDAS EN ROUTER -->
@@ -171,12 +174,10 @@
     </v-main>
     <!-- FOOTER -->
     <v-footer :padless="true">
-      <v-card flat tile width="100%" class="blue darken-4 text-center">
+      <v-card flat tile width="100%" color="var(--just-gray)" class="text-center">
         <v-card-text class="white--text">
-          {{ new Date().getFullYear() }} —
-          <strong
-            >Ministerio de Energía y Minas - Departamento de Informática
-            ©</strong
+          <strong> ACDP | Copyright © Universidad Mariano Galvez de Guatemala {{ new Date().getFullYear() }}
+          </strong
           >
         </v-card-text>
       </v-card>

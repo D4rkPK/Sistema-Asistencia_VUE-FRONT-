@@ -28,6 +28,9 @@ export default {
 --just-gray: #3e3e3e;
 --hospital-blues: #7f9db9;
 
+ /* IMG */
+ --logo: url(https://i.postimg.cc/nVGTs6R1/image.webp);
+
 /* FONTS */
 --sm: 14px;
 --md: 16px;

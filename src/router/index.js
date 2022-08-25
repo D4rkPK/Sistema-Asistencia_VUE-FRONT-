@@ -10,6 +10,18 @@ import Login from '../views/auth/login.vue';
 // DASHBOARD
 import Dashboard from '../views/dashboard/dashboard.vue';
 
+// INICIO
+import Inicio from '../views/inicio/inicio.vue';
+
+// ASISTENCIA
+import Asistencia from '../views/asistencia/asistencia.vue';
+
+// PRACTICANTES
+import Practicantes from '../views/practicantes/practicantes.vue';
+
+// JUSTIFICACIONES
+import Justificaciones from '../views/justificaciones/justificaciones.vue';
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -27,23 +39,28 @@ const routes = [
     path: '/dashboard',
     name: 'dashboard',
     component: Dashboard,
-/*     children: [
+    children: [
       {
-        path: '',
-        name: 'spmi_inicio',
-        component: spmi_inicio
+        path: '/dashboard',
+        name: 'inicio',
+        component: Inicio
       },
       {
-        path: 'ingreso_presentacion',
-        name: 'ingreso_presentacion',
-        component: spmi_ingreso_presentacion
+        path: '/asistencia',
+        name: 'asistencia',
+        component: Asistencia
       },
       {
-        path: 'calendario_presentacion',
-        name: 'calendario_presentacion',
-        component: spmi_calendario
+        path: '/practicantes',
+        name: 'practicantes',
+        component: Practicantes
       },
-    ] */
+      {
+        path: '/justificaciones',
+        name: 'justificaciones',
+        component: Justificaciones
+      },
+    ]
   },
 ]
 

@@ -69,7 +69,7 @@ export default {
       let clave_data = "#$%ffsdf.fDSD-32*" //nombre en sessión storage
       //let clave_rol_id = "$%$SFDSF-RS#$%-22" // rol id en session storage 
       sessionStorage.setItem(clave_data, btoa(data.token));
-      sessionStorage.setItem(clave_token_autorizacion, CryptoJS.AES.encrypt(JSON.stringify(data), data.token + "m3m@21").toString());
+      sessionStorage.setItem(clave_token_autorizacion, CryptoJS.AES.encrypt(JSON.stringify(data), data.token + "umg@22").toString());
       //sessionStorage.setItem(clave_rol_id, parseInt(data.user.rol_id));
     },
 

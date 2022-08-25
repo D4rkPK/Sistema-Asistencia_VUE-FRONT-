@@ -5,11 +5,11 @@ class authService {//servicios para login
   
     constructor(axios, baseUrl) {
       this.axios = axios;
-      this.baseUrl = `${baseUrl}/`;
+      this.baseUrl = `${baseUrl}`;
     }
   
     login(data) {
-      let ruta = `${this.baseUrl}login`
+      let ruta = `${this.baseUrl}/login`
       return this.axios.post(ruta, data);
     }
   }

@@ -129,7 +129,6 @@ export default {
 
     cerrarSesion() {//Cerrar sesión
       this.$router.push("/login");
-      // let url = "https://mem.gob.gt/"
       const clave_token = "#$%ffsdf.fDSD-32*"
       const clave_data = "fdAF#$QV$-r!!@="
       sessionStorage.removeItem(clave_token)
@@ -144,7 +143,7 @@ export default {
       let informacion_incriptada = sessionStorage.getItem('fdAF#$QV$-r!!@=');
 
       if (informacion_incriptada != null) {
-        let key_pass = atob(sessionStorage.getItem('#$%ffsdf.fDSD-32*')) + "m3m@21"
+        let key_pass = atob(sessionStorage.getItem('#$%ffsdf.fDSD-32*')) + "umg@22"
         let bytes = CryptoJS.AES.decrypt(informacion_incriptada, key_pass);
         //Casteo de información a estring
         let informacion_desincriptada = bytes.toString(CryptoJS.enc.Utf8);

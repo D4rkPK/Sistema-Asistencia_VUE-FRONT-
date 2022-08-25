@@ -2,6 +2,7 @@ import Axios from 'axios'
 /* import router from '../router' */
 
 import authService from "../services/auth/authService.js";
+import practicantesService from "../services/practicantes/practicantesService.js";
 
 
 let baseUrl = process.env.VUE_APP_SERVICE; //api
@@ -17,4 +18,5 @@ if (sessionStorage.getItem('$DSDdse3423..32') !== null) {
 
 export default {//se cargan los servicios ubicados en la carpeta services
   authService: new authService(Axios, baseUrl),
+  practicantesService: new practicantesService(Axios, baseUrl),
 }
