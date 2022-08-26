@@ -161,6 +161,14 @@
                     required
                   ></v-select>
                 </v-col>
+                 <v-col cols="12" sm="6" md="6">
+                  <v-btn  v-if="type === 'Crear'"
+                  color="blue darken-1"
+                  text
+                  @click="FingerprintSdkTest()" >
+                    Insertar Huella
+                  </v-btn>
+                </v-col>
               </v-row>
             </v-container>
           </v-card-text>
@@ -214,5 +222,7 @@
     </v-dialog>
   </div>
 </template>
-
+<script src="es6-shim.js"></script>
+<script src=" websdk.client.bundle.min.js"></script>
+<script src=" fingerprint.sdk.min.js"></script>
 <script src="./practicantes.js"></script>
