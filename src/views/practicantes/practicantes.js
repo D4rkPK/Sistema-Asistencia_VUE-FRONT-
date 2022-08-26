@@ -8,29 +8,30 @@ export default {
       item: null,
       type: null,
       search: "",
-      usuario: {
+      estudiante: {
         id: null,
         cui: null,
-        email: '',
-        primer_nombre: '',
-        segundo_nombre: '',
-        primer_apellido: '',
-        segundo_apellido: '',
+        correo: '',
+        nombre: '',
+        apellido: '',
+        correo: '',
+        carne: '',
         area_id: '',
-        rol_id: '',
+        universidad_id: '',
       },
-      default_usuario: {
+      default_estudiante: {
+        id: null,
         cui: null,
-        email: '',
-        primer_nombre: '',
-        segundo_nombre: '',
-        primer_apellido: '',
-        segundo_apellido: '',
+        correo: '',
+        nombre: '',
+        apellido: '',
+        correo: '',
+        carne: '',
         area_id: '',
-        rol_id: '',
+        universidad_id: '',
       },
       itemAreas: [],
-      itemPuestos: [],
+      itemUniversidades: [],
       headers: [
         {
           text: 'DPI',
@@ -51,12 +52,17 @@ export default {
           value: 'apellido',
         },
         {
-          text: 'Email',
+          text: 'Correo',
           align: 'center',
           sortable: true,
           value: 'correo'
         },
-
+        {
+          text: 'Carne',
+          align: 'center',
+          sortable: true,
+          value: 'carne'
+        },
         {
           text: 'Area',
           align: 'center',
@@ -80,7 +86,7 @@ export default {
       rules: {
         required: value => !!value || 'Requerido.',
         cui: value => value.length === 13 || 'El CUI debe contener 13 números',
-        email: value => {
+        correo: value => {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           return pattern.test(value) || 'E-mail invalido.'
         }
@@ -92,24 +98,24 @@ export default {
   },
 
   methods: {
-/*     async dialogForm(item) {
+    async dialogForm(item) {
       await this.listarAreas();
-      await this.listarRoles();
+      await this.listarUniversidades();
       console.log(item, "item");
       if (item == null) {
         if (this.$refs.form != undefined) {
           this.$refs.form.resetValidation()
         }
-        this.usuario = Object.assign(this.usuario, this.default_usuario);
+        this.estudiante = Object.assign(this.estudiante, this.default_estudiante);
         this.type = "Crear";
         this.dialog = true;
       } else {
         this.type = "Editar"
         this.item = item;
-        await this.editUsers();
+        await this.editEstudiantes();
         this.dialog = true;
       }
-    }, */
+    },
 
     async listarPracticantes() {
       try {
@@ -119,21 +125,21 @@ export default {
         console.log(r.data.data);
         this.listado = r.data.data;
         if (r.status === 200) {
-          this.$toast.success('Usuarios obtenidos', { position: "top-right" });
+          this.$toast.success('estudiantes obtenidos', { position: "top-right" });
         } else {
           this.$toast.warning(r.data.message, { position: "top-right" });
         }
         this.loading = false;
       } catch (error) {
         this.loading = false;
-        this.$toast.error('Ocurrio un error al intentar obtener los usuarios', { position: "top-right" });
+        this.$toast.error('Ocurrio un error al intentar obtener los estudiantes', { position: "top-right" });
       }
     },
 
-/*     async listarAreas() {
+    async listarAreas() {
       try {
         this.loading = true;
-        let r = await this.$store.state.services.areasService.listar();
+        let r = await this.$store.state.services.areaService.listar();
         console.log('r.data. AREAS');
         console.log(r.data);
         this.itemAreas = r.data.data;
@@ -144,47 +150,46 @@ export default {
       }
     },
 
-    async listarRoles() {
+    async listarUniversidades() {
       try {
         this.loading = true;
-        let r = await this.$store.state.services.rolesService.listar();
-        console.log('r.data. ROLES');
+        let r = await this.$store.state.services.universidadService.listar();
+        console.log('r.data. universidades');
         console.log(r.data);
-        this.itemPuestos = r.data.data;
+        this.itemUniversidades = r.data.data;
         this.loading = false;
       } catch (error) {
         this.loading = false;
-        this.$toast.error('Ocurrio un error al intentar obtener los roles', { position: "top-right" });
+        this.$toast.error('Ocurrio un error al intentar obtener las universidades', { position: "top-right" });
       }
     },
 
-    async editUsers() {
+    async editEstudiantes() {
       try {
-        console.log("Editar usuarios");
-        this.usuario.id = this.item.id;
-        this.usuario.cui = this.item.cui;
-        this.usuario.email = this.item.email;
-        this.usuario.primer_nombre = this.item.primer_nombre;
-        this.usuario.segundo_nombre = this.item.segundo_nombre;
-        this.usuario.primer_apellido = this.item.primer_apellido;
-        this.usuario.segundo_apellido = this.item.segundo_apellido;
-        this.usuario.area_id = parseInt(this.item.area_id);
-        this.usuario.rol_id = parseInt(this.item.rol_id);
+        console.log("Editar estudiantes");
+        this.estudiante.id = this.item.id;
+        this.estudiante.cui = this.item.cui;
+        this.estudiante.correo = this.item.correo;
+        this.estudiante.carne = this.item.carne;
+        this.estudiante.nombre = this.item.nombre;
+        this.estudiante.apellido = this.item.apellido;
+        this.estudiante.area_id = parseInt(this.item.area_id);
+        this.estudiante.universidad_id = parseInt(this.item.universidad_id);
       } catch (error) {
-        this.$toast.error('Ocurrio un error al intentar obtener al usuario', { position: "top-right" });
+        this.$toast.error('Ocurrio un error al intentar obtener al estudiante', { position: "top-right" });
       }
     },
 
     async confirmarGuardar() {
       if (this.$refs.form.validate()) {
         this.loading = true;
-        console.log(this.usuario, "USUARIO GUARDADO");
-        await this.$store.state.services.usuariosService.guardar(this.usuario)
+        console.log(this.estudiante, "estudiante GUARDADO");
+        await this.$store.state.services.practicantesService.guardar(this.estudiante)
           .then(async () => {
             this.loading = false;
             this.$toast.success('Datos guardados con éxito', { position: "top-right" });
             this.closeDialog();
-            await this.listarUsuarios();
+            await this.listarPracticantes();
           })
           .catch((e) => {
             this.loading = false;
@@ -200,13 +205,13 @@ export default {
     async confirmarEditar() {
       if (this.$refs.form.validate()) {
         this.loading = true;
-        console.log(this.usuario, "DATOS EDITADOS");
-        await this.$store.state.services.usuariosService.actualizar(this.usuario)
+        console.log(this.estudiante, "DATOS EDITADOS");
+        await this.$store.state.services.practicantesService.actualizar(this.estudiante, this.estudiante.id)
           .then(async () => {
             this.loading = false;
             this.$toast.success('Datos actualizados con éxito', { position: "top-right" });
             this.closeDialog();
-            await this.listarUsuarios();
+            await this.listarPracticantes();
           })
           .catch((e) => {
             this.loading = false;
@@ -228,12 +233,12 @@ export default {
 
     confirmarEliminar(item) {
       console.log(item.id, "ID ELIMINADO");
-      this.$store.state.services.usuariosService.eliminar(this.usuario, item.id)
+      this.$store.state.services.practicantesService.eliminar(this.estudiante, item.id)
         .then(async () => {
           this.loading = false;
-          this.$toast.success('Usuario eliminado con éxito', { position: "top-right" });
+          this.$toast.success('estudiante eliminado con éxito', { position: "top-right" });
           this.dialogConfirm = false;
-          await this.listarUsuarios();
+          await this.listarPracticantes();
         })
         .catch((e) => {
           this.loading = false;
@@ -245,10 +250,10 @@ export default {
 
     closeDialog() {
       this.$refs.form.resetValidation();
-      this.usuario = Object.assign(this.usuario, this.default_usuario);
+      this.estudiante = Object.assign(this.estudiante, this.default_estudiante);
       this.dialog = false;
     }
 
-  } */
-}
+  }
+
 }

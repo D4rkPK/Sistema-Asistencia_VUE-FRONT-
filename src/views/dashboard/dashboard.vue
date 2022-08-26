@@ -9,7 +9,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        background-color: var(--just-gray);
+        background-color: var(--deep-blue-hospital);
       "
     >
       <template v-slot:prepend>
@@ -69,9 +69,9 @@
     <!-- MENU BARRA -->
     <v-app-bar
       app
-      color="var(--just-gray )"
+      color="var(--white )"
       class="text-white p-0"
-      elevation="5"
+      elevation="0"
       v-bind="size"
     >
       <v-img
@@ -86,10 +86,11 @@
       <v-tooltip bottom>
         <template v-slot:activator="{ on, attrs }">
           <v-app-bar-nav-icon
+            style="color: var(--hospital-pants)"
             v-bind="attrs"
             v-on="on"
             v-if="mostrarLateral"
-            class="text-white"
+            
             @click="vista_menu()"
           ></v-app-bar-nav-icon>
         </template>
@@ -101,8 +102,8 @@
       <v-tooltip bottom>
         <template v-slot:activator="{ on, attrs }">
           <v-icon
-            class="mx-5 text-white"
-            dark
+            class="mx-5"
+            style="color: var(--hospital-pants)" 
             v-bind="attrs"
             v-on="on"
             @click="selectionUserItems('/dashboard')"
@@ -113,7 +114,7 @@
       </v-tooltip>
 
       <v-spacer></v-spacer>
-      <div class="text-center">
+      <div class="text-center" style="color: var(--just-gray)">
         <strong style="margin: 0 auto">
           <span>{{ userLogged.nombre + " " }}</span>
           <span>{{ userLogged.apellido }}</span>
@@ -150,11 +151,11 @@
         flat
         tile
         width="100%"
-        color="var(--just-gray)"
+        
         class="text-center"
       >
         <v-card-text class="white--text">
-          <strong>
+          <strong style="color: var(--just-gray)">
             ACDP | Copyright © Universidad Mariano Galvez de Guatemala
             {{ new Date().getFullYear() }}
           </strong>
