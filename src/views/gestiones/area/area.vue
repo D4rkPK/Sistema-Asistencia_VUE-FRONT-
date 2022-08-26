@@ -1,16 +1,12 @@
 <template>
   <div>
     <div class="row justify-content-center">
-      <div class="col-md-12">
-        <v-alert
-          color="var(--hospital-pants)"
-          dark
-          border="left"
-          transition="scale-transition"
-          class="text-center fs-2"
-        >
-          AREAS
-        </v-alert>
+      <div class="p-0 mb-10">
+        <v-toolbar dark color="var(--just-gray)">
+          <v-toolbar-title class="ml-3">
+            <strong style="font-size: 30px; letter-spacing: 3px">AREA</strong>
+          </v-toolbar-title>
+        </v-toolbar>
       </div>
     </div>
     <div class="card">
@@ -24,17 +20,17 @@
             single-line
             hide-details
           ></v-text-field>
-          <hr />
-          <v-btn
-            block
-            color="primary"
-            elevation="2"
-            large
-            @click="dialogForm(null)"
-          >
-            Registrar nueva area
-          </v-btn>
-
+          <div class="mb-2" style="text-align: right">
+            <v-btn
+              color="primary"
+              elevation="2"
+              large
+              @click="dialogForm(null)"
+            >
+              Crear nueva área
+            </v-btn>
+          </div>
+          <hr class="mb-0" />
           <v-data-table
             :loading="loading"
             :search="search"

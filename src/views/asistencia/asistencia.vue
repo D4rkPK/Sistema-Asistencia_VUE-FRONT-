@@ -1,16 +1,12 @@
 <template>
   <div>
     <div class="row justify-content-center">
-      <div class="col-md-12">
-        <v-alert
-          color="var(--hospital-pants)"
-          dark
-          border="left"
-          transition="scale-transition"
-          class="text-center fs-2"
-        >
-          ASISTENCIA
-        </v-alert>
+      <div class="p-0">
+        <v-toolbar dark color="var(--just-gray)">
+          <v-toolbar-title class="ml-3">
+            <strong style="font-size: 30px; letter-spacing: 3px">ASISTENCIA</strong>
+          </v-toolbar-title>
+        </v-toolbar>
       </div>
     </div>
   </div>

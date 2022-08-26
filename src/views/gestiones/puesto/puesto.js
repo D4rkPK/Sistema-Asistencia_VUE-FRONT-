@@ -67,15 +67,15 @@ export default {
         console.log(r.data.data);
         this.listado = r.data.data;
         if (r.status === 200) {
-          this.$toast.success("puestos obtenidos", { position: "top-right" });
+          this.$toast.success("puestos obtenidos", { position: "bottom-right" });
         } else {
-          this.$toast.warning(r.data.message, { position: "top-right" });
+          this.$toast.warning(r.data.message, { position: "bottom-right" });
         }
         this.loading = false;
       } catch (error) {
         this.loading = false;
         this.$toast.error("Ocurrio un error al intentar obtener los puestos", {
-          position: "top-right",
+          position: "bottom-right",
         });
       }
     },
@@ -93,7 +93,7 @@ export default {
         this.puesto.universidad_id = parseInt(this.item.universidad_id);
       } catch (error) {
         this.$toast.error("Ocurrio un error al intentar obtener al puesto", {
-          position: "top-right",
+          position: "bottom-right",
         });
       }
     },
@@ -107,7 +107,7 @@ export default {
           .then(async () => {
             this.loading = false;
             this.$toast.success("Datos guardados con éxito", {
-              position: "top-right",
+              position: "bottom-right",
             });
             this.closeDialog();
             await this.listarPuestos();
@@ -116,13 +116,13 @@ export default {
             this.loading = false;
             if (e.response) {
               this.$toast.error(e.response.data.message, {
-                position: "top-right",
+                position: "bottom-right",
               });
             }
           });
       } else {
         this.$toast.error("Debe llenar los campos obligatorios", {
-          position: "top-right",
+          position: "bottom-right",
         });
       }
     },
@@ -136,7 +136,7 @@ export default {
           .then(async () => {
             this.loading = false;
             this.$toast.success("Datos actualizados con éxito", {
-              position: "top-right",
+              position: "bottom-right",
             });
             this.closeDialog();
             await this.listarPuestos();
@@ -145,13 +145,13 @@ export default {
             this.loading = false;
             if (e.response) {
               this.$toast.error(e.response.data.message, {
-                position: "top-right",
+                position: "bottom-right",
               });
             }
           });
       } else {
         this.$toast.error("Debe llenar los campos obligatorios", {
-          position: "top-right",
+          position: "bottom-right",
         });
       }
     },
@@ -169,8 +169,8 @@ export default {
         .eliminar(this.puesto, item.id)
         .then(async () => {
           this.loading = false;
-          this.$toast.success("puesto eliminado con éxito", {
-            position: "top-right",
+          this.$toast.success("Puesto eliminado con éxito", {
+            position: "bottom-right",
           });
           this.dialogConfirm = false;
           await this.listarPuestos();
@@ -179,7 +179,7 @@ export default {
           this.loading = false;
           if (e.response) {
             this.$toast.error(e.response.data.message, {
-              position: "top-right",
+              position: "bottom-right",
             });
           }
         });

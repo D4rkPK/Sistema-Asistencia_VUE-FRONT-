@@ -1,16 +1,14 @@
 <template>
   <div>
     <div class="row justify-content-center">
-      <div class="col-md-12">
-        <v-alert
-          color="var(--hospital-pants)"
-          dark
-          border="left"
-          transition="scale-transition"
-          class="text-center fs-2"
-        >
-          PRACTICANTES
-        </v-alert>
+      <div class="p-0 mb-10">
+        <v-toolbar dark color="var(--just-gray)">
+          <v-toolbar-title class="ml-3"
+            ><strong style="font-size: 30px; letter-spacing: 3px"
+              >PRACTICANTES</strong
+            ></v-toolbar-title
+          >
+        </v-toolbar>
       </div>
     </div>
     <div class="card">
@@ -25,16 +23,17 @@
             hide-details
           ></v-text-field>
           <hr />
-          <v-btn
-            block
-            color="primary"
-            elevation="2"
-            large
-            @click="dialogForm(null)"
-          >
-            Registrar un nuevo practicante
-          </v-btn>
-
+          <div class="mb-2" style="text-align: right">
+            <v-btn
+              color="primary"
+              elevation="2"
+              large
+              @click="dialogForm(null)"
+            >
+              Registrar un nuevo practicante
+            </v-btn>
+          </div>
+          <hr class="mb-0" />
           <v-data-table
             :loading="loading"
             :search="search"
@@ -42,7 +41,7 @@
             :items="listado"
             :items-per-page="20"
             :footer-props="{ 'items-per-page-options': [20, 50, 100] }"
-            class="elevation-1"
+            class="elevation-1 mt-0"
           >
             <template v-slot:[`item.acciones`]="{ item }">
               <v-tooltip bottom color="primary">
@@ -157,15 +156,42 @@
                     :items="itemUniversidades"
                     item-text="nombre"
                     item-value="id"
-                    label="Universidad*"
-                    required
-                  ></v-select>
+                    label="Universidad"
+                    :disabled="isUpdating"
+                    filled
+                    chips
+                    color="blue-grey lighten-2"
+                  >
+                    <template v-slot:selection="data">
+                        <span left>
+                          <strong>{{ data.item.abreviatura }}&nbsp;</strong>
+                        </span>
+                        {{ data.item.nombre }}
+                    </template>
+                    <template v-slot:item="data">
+                      <template v-if="typeof data.item !== 'object'">
+                        <v-list-item-content v-text="data.item"></v-list-item-content>
+                      </template>
+                      <template v-else>
+                        <v-list-item-avatar>
+                          <strong>{{ data.item.abreviatura }}</strong>
+                        </v-list-item-avatar>
+                        <v-list-item-content>
+                          <v-list-item-title
+                            v-html="data.item.nombre"
+                          ></v-list-item-title>
+                        </v-list-item-content>
+                      </template>
+                    </template>
+                  </v-select>
                 </v-col>
-                 <v-col cols="12" sm="6" md="6">
-                  <v-btn  v-if="type === 'Crear'"
-                  color="blue darken-1"
-                  text
-                  @click="FingerprintSdkTest()" >
+                <v-col cols="12" sm="6" md="6">
+                  <v-btn
+                    v-if="type === 'Crear'"
+                    color="blue darken-1"
+                    text
+                    @click="FingerprintSdkTest()"
+                  >
                     Insertar Huella
                   </v-btn>
                 </v-col>
@@ -199,15 +225,17 @@
     </v-dialog>
 
     <!-- Dialog confirmacion -->
-    <v-dialog v-model="dialogConfirm" persistent max-width="300px">
+    <v-dialog v-model="dialogConfirm" persistent max-width="400px">
       <v-card>
         <v-card-title class="text-h5">
-          Esta seguro que desea eliminar este estudiante
+          ¿Esta seguro que desea eliminar este estudiante?
         </v-card-title>
         <v-card-text v-if="item != null">
-          <strong>CUI:</strong>{{ item.cui }} <br />
-          <strong>Nombre:</strong>{{ item.primer_nombre }} <br />
-          <strong>Apellido:</strong>{{ item.primer_apellido }} <br />
+          <strong>DPI: </strong>{{ item.cui }} <br />
+          <strong>Nombre: </strong>{{ item.nombre }} <br />
+          <strong>Apellido: </strong>{{ item.apellido }} <br />
+          <strong>Área: </strong>{{ item.area.descripcion }} <br />
+          <strong>Universidad: </strong>{{ item.universidad.nombre }} <br />
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>

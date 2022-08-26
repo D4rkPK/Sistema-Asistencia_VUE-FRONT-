@@ -76,14 +76,14 @@ export default {
         console.log(r.data.data);
         this.listado = r.data.data;
         if (r.status === 200) {
-          this.$toast.success('areas obtenidos', { position: "top-right" });
+          this.$toast.success('Areas obtenidas', { position: "bottom-right" });
         } else {
-          this.$toast.warning(r.data.message, { position: "top-right" });
+          this.$toast.warning(r.data.message, { position: "bottom-right" });
         }
         this.loading = false;
       } catch (error) {
         this.loading = false;
-        this.$toast.error('Ocurrio un error al intentar obtener las areas', { position: "top-right" });
+        this.$toast.error('Ocurrio un error al intentar obtener las areas', { position: "bottom-right" });
       }
     },
 
@@ -97,7 +97,7 @@ export default {
         this.loading = false;
       } catch (error) {
         this.loading = false;
-        this.$toast.error('Ocurrio un error al intentar obtener las areas', { position: "top-right" });
+        this.$toast.error('Ocurrio un error al intentar obtener las areas', { position: "bottom-right" });
       }
     },
 
@@ -107,7 +107,7 @@ export default {
         this.area.id = this.item.id;
         this.area.user_id = parseInt(this.item.user_id);
       } catch (error) {
-        this.$toast.error('Ocurrio un error al intentar obtener al area', { position: "top-right" });
+        this.$toast.error('Ocurrio un error al intentar obtener el area', { position: "bottom-right" });
       }
     },
 
@@ -118,18 +118,18 @@ export default {
         await this.$store.state.services.areaService.guardar(this.area)
           .then(async () => {
             this.loading = false;
-            this.$toast.success('Datos guardados con éxito', { position: "top-right" });
+            this.$toast.success('Datos guardados con éxito', { position: "bottom-right" });
             this.closeDialog();
             await this.listarArea();
           })
           .catch((e) => {
             this.loading = false;
             if (e.response) {
-              this.$toast.error(e.response.data.message, { position: 'top-right' });
+              this.$toast.error(e.response.data.message, { position: 'bottom-right' });
             }
           });
       } else {
-        this.$toast.error("Debe llenar los campos obligatorios", { position: 'top-right' })
+        this.$toast.error("Debe llenar los campos obligatorios", { position: 'bottom-right' })
       }
     },
 
@@ -140,18 +140,18 @@ export default {
         await this.$store.state.services.areaService.actualizar(this.area, this.area.id)
           .then(async () => {
             this.loading = false;
-            this.$toast.success('Datos actualizados con éxito', { position: "top-right" });
+            this.$toast.success('Datos actualizados con éxito', { position: "bottom-right" });
             this.closeDialog();
             await this.listarArea();
           })
           .catch((e) => {
             this.loading = false;
             if (e.response) {
-              this.$toast.error(e.response.data.message, { position: 'top-right' });
+              this.$toast.error(e.response.data.message, { position: 'bottom-right' });
             }
           });
       } else {
-        this.$toast.error("Debe llenar los campos obligatorios", { position: 'top-right' })
+        this.$toast.error("Debe llenar los campos obligatorios", { position: 'bottom-right' })
       }
     },
 
@@ -167,14 +167,14 @@ export default {
       this.$store.state.services.areaService.eliminar(this.area, item.id)
         .then(async () => {
           this.loading = false;
-          this.$toast.success('area eliminado con éxito', { position: "top-right" });
+          this.$toast.success('Area eliminado con éxito', { position: "bottom-right" });
           this.dialogConfirm = false;
           await this.listarArea();
         })
         .catch((e) => {
           this.loading = false;
           if (e.response) {
-            this.$toast.error(e.response.data.message, { position: 'top-right' });
+            this.$toast.error(e.response.data.message, { position: 'bottom-right' });
           }
         });
     },

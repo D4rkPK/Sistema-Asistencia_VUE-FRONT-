@@ -33,9 +33,9 @@ export default {
       { nombre: 'Practicantes', icono: 'person', path: '/practicantes' },
       { nombre: 'Justificaciones', icono: 'description', path: '/justificaciones'},
 
-      { nombre: 'Areas', icono: 'description', path: '/areas'},
-      { nombre: 'Puestos', icono: 'description', path: '/puestos'},
-      { nombre: 'Universidades', icono: 'description', path: '/universidades'},
+      { nombre: 'Areas', icono: 'medical_information', path: '/areas'},
+      { nombre: 'Puestos', icono: 'badge', path: '/puestos'},
+      { nombre: 'Universidades', icono: 'school', path: '/universidades'},
 
 
 

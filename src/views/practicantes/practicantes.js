@@ -10,7 +10,7 @@ export default {
       search: "",
       estudiante: {
         id: null,
-        cui: null,
+        cui: '',
         correo: '',
         nombre: '',
         apellido: '',
@@ -21,7 +21,7 @@ export default {
       },
       default_estudiante: {
         id: null,
-        cui: null,
+        cui: '',
         correo: '',
         nombre: '',
         apellido: '',
@@ -125,14 +125,14 @@ export default {
         console.log(r.data.data);
         this.listado = r.data.data;
         if (r.status === 200) {
-          this.$toast.success('estudiantes obtenidos', { position: "top-right" });
+          this.$toast.success('Practicantes obtenidos', { position: "bottom-right" });
         } else {
-          this.$toast.warning(r.data.message, { position: "top-right" });
+          this.$toast.warning(r.data.message, { position: "bottom-right" });
         }
         this.loading = false;
       } catch (error) {
         this.loading = false;
-        this.$toast.error('Ocurrio un error al intentar obtener los estudiantes', { position: "top-right" });
+        this.$toast.error('Ocurrio un error al intentar obtener los practicantes', { position: "bottom-right" });
       }
     },
 
@@ -146,7 +146,7 @@ export default {
         this.loading = false;
       } catch (error) {
         this.loading = false;
-        this.$toast.error('Ocurrio un error al intentar obtener las areas', { position: "top-right" });
+        this.$toast.error('Ocurrio un error al intentar obtener las areas', { position: "bottom-right" });
       }
     },
 
@@ -160,7 +160,7 @@ export default {
         this.loading = false;
       } catch (error) {
         this.loading = false;
-        this.$toast.error('Ocurrio un error al intentar obtener las universidades', { position: "top-right" });
+        this.$toast.error('Ocurrio un error al intentar obtener las universidades', { position: "bottom-right" });
       }
     },
 
@@ -176,7 +176,7 @@ export default {
         this.estudiante.area_id = parseInt(this.item.area_id);
         this.estudiante.universidad_id = parseInt(this.item.universidad_id);
       } catch (error) {
-        this.$toast.error('Ocurrio un error al intentar obtener al estudiante', { position: "top-right" });
+        this.$toast.error('Ocurrio un error al intentar obtener al practicante', { position: "bottom-right" });
       }
     },
 
@@ -187,18 +187,18 @@ export default {
         await this.$store.state.services.practicantesService.guardar(this.estudiante)
           .then(async () => {
             this.loading = false;
-            this.$toast.success('Datos guardados con éxito', { position: "top-right" });
+            this.$toast.success('Datos guardados con éxito', { position: "bottom-right" });
             this.closeDialog();
             await this.listarPracticantes();
           })
           .catch((e) => {
             this.loading = false;
             if (e.response) {
-              this.$toast.error(e.response.data.message, { position: 'top-right' });
+              this.$toast.error(e.response.data.message, { position: 'bottom-right' });
             }
           });
       } else {
-        this.$toast.error("Debe llenar los campos obligatorios", { position: 'top-right' })
+        this.$toast.error("Debe llenar los campos obligatorios", { position: 'bottom-right' })
       }
     },
 
@@ -209,18 +209,18 @@ export default {
         await this.$store.state.services.practicantesService.actualizar(this.estudiante, this.estudiante.id)
           .then(async () => {
             this.loading = false;
-            this.$toast.success('Datos actualizados con éxito', { position: "top-right" });
+            this.$toast.success('Datos actualizados con éxito', { position: "bottom-right" });
             this.closeDialog();
             await this.listarPracticantes();
           })
           .catch((e) => {
             this.loading = false;
             if (e.response) {
-              this.$toast.error(e.response.data.message, { position: 'top-right' });
+              this.$toast.error(e.response.data.message, { position: 'bottom-right' });
             }
           });
       } else {
-        this.$toast.error("Debe llenar los campos obligatorios", { position: 'top-right' })
+        this.$toast.error("Debe llenar los campos obligatorios", { position: 'bottom-right' })
       }
     },
 
@@ -236,14 +236,14 @@ export default {
       this.$store.state.services.practicantesService.eliminar(this.estudiante, item.id)
         .then(async () => {
           this.loading = false;
-          this.$toast.success('estudiante eliminado con éxito', { position: "top-right" });
+          this.$toast.success('Practicante eliminado con éxito', { position: "bottom-right" });
           this.dialogConfirm = false;
           await this.listarPracticantes();
         })
         .catch((e) => {
           this.loading = false;
           if (e.response) {
-            this.$toast.error(e.response.data.message, { position: 'top-right' });
+            this.$toast.error(e.response.data.message, { position: 'bottom-right' });
           }
         });
     },

@@ -76,14 +76,14 @@ export default {
         console.log(r.data.data);
         this.listado = r.data.data;
         if (r.status === 200) {
-          this.$toast.success('universidads obtenidos', { position: "top-right" });
+          this.$toast.success('universidades obtenidas', { position: "bottom-right" });
         } else {
-          this.$toast.warning(r.data.message, { position: "top-right" });
+          this.$toast.warning(r.data.message, { position: "bottom-right" });
         }
         this.loading = false;
       } catch (error) {
         this.loading = false;
-        this.$toast.error('Ocurrio un error al intentar obtener las universidads', { position: "top-right" });
+        this.$toast.error('Ocurrio un error al intentar obtener las universidades', { position: "bottom-right" });
       }
     },
 
@@ -94,7 +94,7 @@ export default {
         this.universidad.abreviatura = this.item.abreviatura;
         this.universidad.nombre = this.item.nombre;
       } catch (error) {
-        this.$toast.error('Ocurrio un error al intentar obtener al universidad', { position: "top-right" });
+        this.$toast.error('Ocurrio un error al intentar obtener al universidades', { position: "bottom-right" });
       }
     },
 
@@ -105,18 +105,18 @@ export default {
         await this.$store.state.services.universidadService.guardar(this.universidad)
           .then(async () => {
             this.loading = false;
-            this.$toast.success('Datos guardados con éxito', { position: "top-right" });
+            this.$toast.success('Datos guardados con éxito', { position: "bottom-right" });
             this.closeDialog();
             await this.listarUniversidad();
           })
           .catch((e) => {
             this.loading = false;
             if (e.response) {
-              this.$toast.error(e.response.data.message, { position: 'top-right' });
+              this.$toast.error(e.response.data.message, { position: 'bottom-right' });
             }
           });
       } else {
-        this.$toast.error("Debe llenar los campos obligatorios", { position: 'top-right' })
+        this.$toast.error("Debe llenar los campos obligatorios", { position: 'bottom-right' })
       }
     },
 
@@ -127,18 +127,18 @@ export default {
         await this.$store.state.services.universidadService.actualizar(this.universidad, this.universidad.id)
           .then(async () => {
             this.loading = false;
-            this.$toast.success('Datos actualizados con éxito', { position: "top-right" });
+            this.$toast.success('Datos actualizados con éxito', { position: "bottom-right" });
             this.closeDialog();
             await this.listarUniversidad();
           })
           .catch((e) => {
             this.loading = false;
             if (e.response) {
-              this.$toast.error(e.response.data.message, { position: 'top-right' });
+              this.$toast.error(e.response.data.message, { position: 'bottom-right' });
             }
           });
       } else {
-        this.$toast.error("Debe llenar los campos obligatorios", { position: 'top-right' })
+        this.$toast.error("Debe llenar los campos obligatorios", { position: 'bottom-right' })
       }
     },
 
@@ -154,14 +154,14 @@ export default {
       this.$store.state.services.universidadService.eliminar(this.universidad, item.id)
         .then(async () => {
           this.loading = false;
-          this.$toast.success('universidad eliminado con éxito', { position: "top-right" });
+          this.$toast.success('Universidad eliminada con éxito', { position: "bottom-right" });
           this.dialogConfirm = false;
           await this.listarUniversidad();
         })
         .catch((e) => {
           this.loading = false;
           if (e.response) {
-            this.$toast.error(e.response.data.message, { position: 'top-right' });
+            this.$toast.error(e.response.data.message, { position: 'bottom-right' });
           }
         });
     },
