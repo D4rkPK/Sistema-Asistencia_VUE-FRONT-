@@ -95,69 +95,21 @@
           <v-card-text>
             <v-container>
               <v-row>
-                <v-col cols="12" sm="6">
-                  <v-text-field
-                    v-if="type === 'Crear'"
-                    v-model="area.cui"
-                    :rules="[rules.required, rules.cui]"
-                    label="DPI*"
-                    counter
-                    type="text"
-                    maxlength="13"
-                  ></v-text-field>
-                  <v-text-field
-                    v-if="type === 'Editar'"
-                    v-model="area.cui"
-                    label="CUI"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="6">
-                  <v-text-field
-                    v-model="area.correo"
-                    :rules="[rules.required, rules.correo]"
-                    label="correo*"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="6">
-                  <v-text-field
-                    v-model="area.carne"
-                    :rules="[rules.required, rules.carne]"
-                    label="Carne*"
-                  ></v-text-field>
-                </v-col>
                 <v-col cols="12" sm="6" md="6">
                   <v-text-field
-                    v-model="area.nombre"
+                    v-model="area.descripcion"
                     :rules="[rules.required]"
                     label="Nombre*"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="6">
-                  <v-text-field
-                    v-model="area.apellido"
-                    label="Apellido*"
-                  ></v-text-field>
-                </v-col>
-
-                <v-col cols="12" sm="6" md="6">
                   <v-select
-                    v-model="area.area_id"
+                    v-model="area.user_id"
                     :rules="[rules.required]"
-                    :items="itemAreas"
+                    :items="itemUsuarios"
                     item-text="descripcion"
                     item-value="id"
-                    label="Area*"
-                    required
-                  ></v-select>
-                </v-col>
-                <v-col cols="12" sm="6" md="6">
-                  <v-select
-                    v-model="area.universidad_id"
-                    :rules="[rules.required]"
-                    :items="itemUniversidades"
-                    item-text="nombre"
-                    item-value="id"
-                    label="Universidad*"
+                    label="Encargado*"
                     required
                   ></v-select>
                 </v-col>

@@ -1,4 +1,4 @@
-var FingerprintSdkTest = (function () {
+/* var FingerprintSdkTest = (function () {
     function FingerprintSdkTest() {
     this.sdk = new Fingerprint.WebApi;
     }
@@ -17,6 +17,12 @@ var FingerprintSdkTest = (function () {
     }, function (error){
     console.log(error.message);
     });
-   }
+   } */
 
+
+
+
+
+
+   
    

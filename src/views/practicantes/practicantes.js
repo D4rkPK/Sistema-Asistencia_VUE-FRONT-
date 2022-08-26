@@ -252,8 +252,7 @@ export default {
       this.$refs.form.resetValidation();
       this.estudiante = Object.assign(this.estudiante, this.default_estudiante);
       this.dialog = false;
-    }
-
+    },
   }
 
 }

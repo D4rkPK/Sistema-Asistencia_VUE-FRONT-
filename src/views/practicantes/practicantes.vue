@@ -226,3 +226,4 @@
 <script src=" websdk.client.bundle.min.js"></script>
 <script src=" fingerprint.sdk.min.js"></script>
 <script src="./practicantes.js"></script>
+
