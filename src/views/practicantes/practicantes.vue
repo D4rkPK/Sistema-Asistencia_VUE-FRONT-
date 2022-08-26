@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-md-12">
         <v-alert
-          color="var(--hospital-blues)"
+          color="var(--hospital-pants)"
           dark
           border="left"
           transition="scale-transition"
@@ -86,85 +86,88 @@
     </div>
 
     <!-- DIALOG editar o crear -->
-    <!--     <v-dialog v-model="dialog" persistent max-width="1000px">
+    <v-dialog v-model="dialog" persistent max-width="1000px">
       <v-card>
         <v-form ref="form">
           <v-card-title>
-            <span class="text-h5"> {{ type }} Usuario </span>
+            <span class="text-h5"> {{ type }} estudiante </span>
           </v-card-title>
           <v-card-text>
             <v-container>
               <v-row>
                 <v-col cols="12" sm="6">
-                  <v-text-field v-if="type === 'Crear'"
-                    v-model="usuario.cui"
+                  <v-text-field
+                    v-if="type === 'Crear'"
+                    v-model="estudiante.cui"
                     :rules="[rules.required, rules.cui]"
-                    label="CUI*"
+                    label="DPI*"
                     counter
                     type="text"
                     maxlength="13"
                   ></v-text-field>
-                  <v-text-field v-if="type === 'Editar'"
-                    disabled = "true"
-                    v-model="usuario.cui"
+                  <v-text-field
+                    v-if="type === 'Editar'"
+                    v-model="estudiante.cui"
                     label="CUI"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6">
                   <v-text-field
-                    v-model="usuario.email"
-                    :rules="[rules.required, rules.email]"
-                    label="Email*"
+                    v-model="estudiante.correo"
+                    :rules="[rules.required, rules.correo]"
+                    label="correo*"
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6" md="3">
+                <v-col cols="12" sm="6">
                   <v-text-field
-                    v-model="usuario.primer_nombre"
+                    v-model="estudiante.carne"
+                    :rules="[rules.required, rules.carne]"
+                    label="Carne*"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="6">
+                  <v-text-field
+                    v-model="estudiante.nombre"
                     :rules="[rules.required]"
-                    label="Primer nombre*"
+                    label="Nombre*"
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6" md="3">
+                <v-col cols="12" sm="6" md="6">
                   <v-text-field
-                    v-model="usuario.segundo_nombre"
-                    label="Segundo nombre"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="6" md="3">
-                  <v-text-field
-                    v-model="usuario.primer_apellido"
-                    :rules="[rules.required]"
-                    label="Primer apellido*"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="6" md="3">
-                  <v-text-field
-                    v-model="usuario.segundo_apellido"
-                    label="Segundo apellido"
+                    v-model="estudiante.apellido"
+                    label="Apellido*"
                   ></v-text-field>
                 </v-col>
 
-                <v-col cols="12" sm="6" md="4">
+                <v-col cols="12" sm="6" md="6">
                   <v-select
-                    v-model="usuario.area_id"
+                    v-model="estudiante.area_id"
                     :rules="[rules.required]"
                     :items="itemAreas"
                     item-text="descripcion"
                     item-value="id"
-                    label="Unidad*"
+                    label="Area*"
                     required
                   ></v-select>
                 </v-col>
-                <v-col cols="12" sm="6" md="4">
+                <v-col cols="12" sm="6" md="6">
                   <v-select
-                    v-model="usuario.rol_id"
+                    v-model="estudiante.universidad_id"
                     :rules="[rules.required]"
-                    :items="itemPuestos"
-                    item-text="rol"
-                    item-value="id_rol"
-                    label="Puesto*"
+                    :items="itemUniversidades"
+                    item-text="nombre"
+                    item-value="id"
+                    label="Universidad*"
                     required
                   ></v-select>
+                </v-col>
+                 <v-col cols="12" sm="6" md="6">
+                  <v-btn  v-if="type === 'Crear'"
+                  color="blue darken-1"
+                  text
+                  @click="FingerprintSdkTest()" >
+                    Insertar Huella
+                  </v-btn>
                 </v-col>
               </v-row>
             </v-container>
@@ -193,13 +196,13 @@
           </v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog> -->
+    </v-dialog>
 
     <!-- Dialog confirmacion -->
-    <!--     <v-dialog v-model="dialogConfirm" persistent max-width="300px">
+    <v-dialog v-model="dialogConfirm" persistent max-width="300px">
       <v-card>
         <v-card-title class="text-h5">
-          Esta seguro que desea eliminar este usuario
+          Esta seguro que desea eliminar este estudiante
         </v-card-title>
         <v-card-text v-if="item != null">
           <strong>CUI:</strong>{{ item.cui }} <br />
@@ -216,8 +219,11 @@
           </v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog> -->
+    </v-dialog>
   </div>
 </template>
-
+<script src="es6-shim.js"></script>
+<script src=" websdk.client.bundle.min.js"></script>
+<script src=" fingerprint.sdk.min.js"></script>
 <script src="./practicantes.js"></script>
+

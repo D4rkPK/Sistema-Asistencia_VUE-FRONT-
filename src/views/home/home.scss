@@ -1,10 +1,28 @@
-.home {
-    // height: 2000px;
-    height: 100%;
-    background-image: url(https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/QIAQ9Rd/videoblocks-male-doctor-with-checklist-animation-4k-video-animated_s-psbh2di_thumbnail-1080_01.png);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-color: white;
-  }
+main{
+  height: 100%;
+  background-image: url(https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/QIAQ9Rd/videoblocks-male-doctor-with-checklist-animation-4k-video-animated_s-psbh2di_thumbnail-1080_01.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: white;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  font-size: 8rem;
+  margin: auto;
+  text-align: left;
+  min-width: 500px;
+  min-height: 300px;
+  max-width: 800px;
+  max-height: 600px;
+}
+
+.container {
+  margin-top: 10%;
+}
+
+.cardDashboard {
+  opacity: 90%;
+}

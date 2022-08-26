@@ -3,7 +3,9 @@ import Axios from 'axios'
 
 import authService from "../services/auth/authService.js";
 import practicantesService from "../services/practicantes/practicantesService.js";
-
+import areaService from "../services/area/areaService.js";
+import puestoService from "../services/puesto/puestoService.js";
+import universidadService from "../services/universidad/universidadService.js";
 
 let baseUrl = process.env.VUE_APP_SERVICE; //api
 
@@ -19,4 +21,7 @@ if (sessionStorage.getItem('$DSDdse3423..32') !== null) {
 export default {//se cargan los servicios ubicados en la carpeta services
   authService: new authService(Axios, baseUrl),
   practicantesService: new practicantesService(Axios, baseUrl),
+  areaService: new areaService(Axios, baseUrl),
+  puestoService: new puestoService(Axios, baseUrl),
+  universidadService: new universidadService(Axios, baseUrl),
 }

@@ -20,11 +20,11 @@ export default {
   /* COLORS */
 --white: #ffffff;
 --black: #000000;
---deep-blue-hospital: #0c479d;
---hospital-pants: #94b6e6;
---hospital-walls: #e8f1fb;
+--deep-blue-hospital: #005be7;
+--hospital-pants: #004bc1;
+--hospital-walls: #eeeff1;
 --just-gray: #3e3e3e;
---hospital-blues: #7f9db9;
+--hospital-blues: #6ed0f6;
 
  /* IMG */
  --logo: url(https://i.postimg.cc/nVGTs6R1/image.webp);

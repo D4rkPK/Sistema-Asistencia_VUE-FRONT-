@@ -11,7 +11,7 @@
             <v-container fluid fill-height>
               <v-row no-gutters>
                 <v-col cols="12" sm="6" md="6">
-                  <v-card class="mx-auto pa-4" max-width="400">
+                  <v-card class="card cardDashboard mx-auto pa-4" max-width="400">
                     <v-card-text>
                       <strong
                         class="text-h4 text--primary"
@@ -37,7 +37,7 @@
 
                 <v-col cols="12" sm="6" md="6">
                   <v-card
-                    class="mx-auto pa-4"
+                    class="card cardAsistencia mx-auto pa-4"
                     max-width="400"
                     color="var(--deep-blue-hospital)"
                   >
@@ -68,4 +68,4 @@
 </template>
 
 <script src="./home.js"></script>
-<style lang="scss" src="./home.scss"></style>
+<style scoped lang="scss" src="./home.scss"></style>

@@ -22,6 +22,11 @@ import Practicantes from '../views/practicantes/practicantes.vue';
 // JUSTIFICACIONES
 import Justificaciones from '../views/justificaciones/justificaciones.vue';
 
+// GESTIONES
+import Areas from '../views/gestiones/area/area.vue';
+import Puestos from '../views/gestiones/puesto/puesto.vue';
+import Universidades from '../views/gestiones/universidad/universidad.vue';
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -60,6 +65,21 @@ const routes = [
         name: 'justificaciones',
         component: Justificaciones
       },
+      { 
+        path: '/areas',
+        name: 'areas',
+        component: Areas
+      },
+      {
+        path: '/puestos',
+        name: 'puestos',
+        component: Puestos
+      },
+      {
+        path: '/universidades',
+        name: 'universidades',
+        component: Universidades
+      }
     ]
   },
 ]

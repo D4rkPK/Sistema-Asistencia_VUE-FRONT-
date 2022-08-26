@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-md-12">
         <v-alert
-          color="var(--hospital-blues)"
+          color="var(--hospital-pants)"
           dark
           border="left"
           transition="scale-transition"
