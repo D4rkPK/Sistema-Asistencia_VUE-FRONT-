@@ -30,7 +30,7 @@ export default {
           text: 'Encargado',
           align: 'center',
           sortable: true,
-          value: 'encargado',
+          value: 'encargado.nombre',
         },
         {
           text: 'Acciones',
