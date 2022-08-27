@@ -127,13 +127,14 @@
                 <v-col cols="12" sm="6" md="6">
                   <v-text-field
                     v-model="estudiante.nombre"
-                    :rules="[rules.required]"
+                    :rules="[rules.required, rules.noNumeros]"
                     label="Nombre*"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="6">
                   <v-text-field
                     v-model="estudiante.apellido"
+                    :rules="[rules.required, rules.noNumeros]"
                     label="Apellido*"
                   ></v-text-field>
                 </v-col>

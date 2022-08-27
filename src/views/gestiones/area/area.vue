@@ -102,12 +102,13 @@
                   <v-select
                     v-model="area.user_id"
                     :rules="[rules.required]"
-                    :items="itemUsuarios"
-                    item-text="descripcion"
+                    :items="itemEncargados"
+                    item-text="nombre"
                     item-value="id"
                     label="Encargado*"
                     required
-                  ></v-select>
+                  >
+                  </v-select>
                 </v-col>
               </v-row>
             </v-container>

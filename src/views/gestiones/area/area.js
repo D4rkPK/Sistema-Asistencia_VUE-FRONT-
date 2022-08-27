@@ -18,7 +18,7 @@ export default {
         descripcion: '',
         user_id: '',
       },
-      itemUsuarios: [],
+      itemEncargados: [],
       headers: [
         {
           text: 'Descripción',	
@@ -30,7 +30,7 @@ export default {
           text: 'Encargado',
           align: 'center',
           sortable: true,
-          value: 'user.descripcion'
+          value: 'encargado',
         },
         {
           text: 'Acciones',
@@ -90,10 +90,10 @@ export default {
     async listarEncargados() {
       try {
         this.loading = true;
-        let r = await this.$store.state.services.users.listar();
+        let r = await this.$store.state.services.encargadosService.listar();
         console.log('r.data. Encargados');
         console.log(r.data);
-        this.itemAreas = r.data.data;
+        this.itemEncargados = r.data.data;
         this.loading = false;
       } catch (error) {
         this.loading = false;
@@ -105,6 +105,7 @@ export default {
       try {
         console.log("Editar areas");
         this.area.id = this.item.id;
+        this.area.descripcion = this.item.descripcion;
         this.area.user_id = parseInt(this.item.user_id);
       } catch (error) {
         this.$toast.error('Ocurrio un error al intentar obtener el area', { position: "bottom-right" });
