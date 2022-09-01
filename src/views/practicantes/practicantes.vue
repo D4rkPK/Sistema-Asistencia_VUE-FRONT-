@@ -158,7 +158,6 @@
                     item-text="nombre"
                     item-value="id"
                     label="Universidad"
-                    :disabled="isUpdating"
                     filled
                     chips
                     color="blue-grey lighten-2"
@@ -191,7 +190,7 @@
                     v-if="type === 'Crear'"
                     color="blue darken-1"
                     text
-                    @click="FingerprintSdkTest()"
+                    @click="FingerprintSdk()"
                   >
                     Insertar Huella
                   </v-btn>

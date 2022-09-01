@@ -27,6 +27,11 @@ class practicantesService {
     let ruta = `${this.baseUrl}/delete/${id}`;
     return this.axios.delete(ruta, data);
   }
+
+  openFingerPrint() {
+    let ruta = `${this.baseUrl}/huella`;
+    return this.axios.get(ruta);
+  }
 }
 
 export default practicantesService;

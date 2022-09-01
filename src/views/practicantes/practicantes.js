@@ -257,5 +257,18 @@ export default {
       this.estudiante = Object.assign(this.estudiante, this.default_estudiante);
       this.dialog = false;
     },
+    
+    async FingerprintSdk() {
+
+      try {
+        this.loading = true;
+        let r = await this.$store.state.services.practicantesService.openFingerPrint();
+        console.log("FingerprintSdk");
+        this.loading = false;
+      } catch (error) {
+        this.loading = false;
+        this.$toast.error('Ocurrio un error al abrir el ejecutable', { position: "top-right" });
+      }
+    }
   }
 }
