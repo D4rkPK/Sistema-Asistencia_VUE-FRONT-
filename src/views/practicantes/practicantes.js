@@ -58,7 +58,7 @@ export default {
           value: 'correo'
         },
         {
-          text: 'Carne',
+          text: 'Carné',
           align: 'center',
           sortable: true,
           value: 'carne'
@@ -74,6 +74,18 @@ export default {
           align: 'center',
           sortable: true,
           value: 'universidad.nombre',
+        },
+        {
+          text: 'Estado Huella',
+          align: 'center',
+          sortable: true,
+          value: 'estado_huella',
+        },
+        {
+          text: 'Huella',
+          align: 'center',
+          sortable: false,
+          value: 'huella',
         },
         {
           text: 'Acciones',
@@ -258,13 +270,22 @@ export default {
       this.dialog = false;
     },
     
-    async FingerprintSdk() {
+    async FingerprintSdk(item) {
 
       try {
         this.loading = true;
-        let r = await this.$store.state.services.practicantesService.openFingerPrint();
-        console.log("FingerprintSdk");
-        this.loading = false;
+        console.log("FingerprintSdk", item.id);
+
+        await this.$store.state.services.practicantesService.guardarTemp({'estudiante_id': item.id})
+          .then(async () => {
+          })
+          .catch((e) => {
+            if (e.response) {
+              this.$toast.error(e.response.data.message, { position: 'top-right' });
+            }
+          });
+          this.loading = false;
+          let r = await this.$store.state.services.practicantesService.openFingerPrint();
       } catch (error) {
         this.loading = false;
         this.$toast.error('Ocurrio un error al abrir el ejecutable', { position: "top-right" });

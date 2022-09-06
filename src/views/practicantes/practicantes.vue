@@ -43,6 +43,33 @@
             :footer-props="{ 'items-per-page-options': [20, 50, 100] }"
             class="elevation-1 mt-0"
           >
+
+          <template v-slot:[`item.estado_huella`]="{ item }">
+            <v-icon v-if="item.estado_huella == 1" color="green">mdi-check</v-icon>
+            <v-icon v-else color="red">mdi-close</v-icon>
+          </template>
+
+          <template v-slot:[`item.huella`]="{ item }">
+              <v-tooltip bottom color="primary">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    @click="FingerprintSdk(item)"
+                    v-bind="attrs"
+                    v-on="on"
+                    fab
+                    icon
+                    dark
+                    small
+                    color="primary"
+                  >
+                    <v-icon dark class="text-center"> fingerprint </v-icon>
+                  </v-btn>
+                </template>
+                <span>Asignar Huella</span>
+              </v-tooltip>
+            </template>
+
+
             <template v-slot:[`item.acciones`]="{ item }">
               <v-tooltip bottom color="primary">
                 <template v-slot:activator="{ on, attrs }">
@@ -184,16 +211,6 @@
                       </template>
                     </template>
                   </v-select>
-                </v-col>
-                <v-col cols="12" sm="6" md="6">
-                  <v-btn
-                    v-if="type === 'Crear'"
-                    color="blue darken-1"
-                    text
-                    @click="FingerprintSdk()"
-                  >
-                    Insertar Huella
-                  </v-btn>
                 </v-col>
               </v-row>
             </v-container>

@@ -6,6 +6,7 @@ class practicantesService {
   constructor(axios, baseUrl) {
     this.axios = axios;
     this.baseUrl = `${baseUrl}/estudiante`;
+    this.baseUrl1= `${baseUrl}/temp_estudiante`;
   }
 
   listar() {
@@ -30,6 +31,16 @@ class practicantesService {
 
   openFingerPrint() {
     let ruta = `${this.baseUrl}/huella`;
+    return this.axios.get(ruta);
+  }
+
+  guardarTemp(data) {
+    let ruta = `${this.baseUrl1}/create`;
+    return this.axios.post(ruta, data);
+  }
+
+  eliminarTemp() {
+    let ruta = `${this.baseUrl1}/delete`;
     return this.axios.get(ruta);
   }
 }
