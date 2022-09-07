@@ -139,16 +139,16 @@
                 </v-col>
                 <v-col cols="12" sm="6">
                   <v-text-field
-                    v-model="estudiante.correo"
-                    :rules="[rules.required, rules.correo]"
-                    label="correo*"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="6">
-                  <v-text-field
                     v-model="estudiante.carne"
                     :rules="[rules.required, rules.carne]"
-                    label="Carne*"
+                    label="Carné*"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="estudiante.correo"
+                    :rules="[rules.required, rules.correo]"
+                    label="Correo*"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="6">
@@ -173,7 +173,7 @@
                     :items="itemAreas"
                     item-text="descripcion"
                     item-value="id"
-                    label="Area*"
+                    label="Área*"
                     required
                   ></v-select>
                 </v-col>
