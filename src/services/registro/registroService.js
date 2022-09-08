@@ -12,6 +12,11 @@ class registroService {
       let ruta = `${this.baseUrl}`;
       return this.axios.get(ruta);
     }
+
+    listarFaltantes() {
+      let ruta = `${this.baseUrl}/faltante`;
+      return this.axios.get(ruta);
+    }
   
     actualizar(data, id) {
       let ruta = `${this.baseUrl}/update/${id}`;

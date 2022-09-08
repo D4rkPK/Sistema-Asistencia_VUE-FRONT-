@@ -37,7 +37,7 @@ export default {
           text: "Nombre",
           align: "center",
           sortable: true,
-          value: "horario_asignado.estudiante_id",
+          value: "estudiante.full_name",
         },
         {
           text: "Entrada",
