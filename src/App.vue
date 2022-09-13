@@ -18,6 +18,8 @@ export default {
 <style>
 :root {
   /* COLORS */
+--color-azul: #1589c2;
+--color-textAzul: #152a4c;
 --white: #ffffff;
 --black: #000000;
 --deep-blue-hospital: #005be7;
@@ -34,5 +36,10 @@ export default {
 --md: 16px;
 --lg: 18px;
 --en: 100px;
+}
+
+
+.v-list-group .v-icon.v-icon {
+  color: white !important;
 }
 </style>

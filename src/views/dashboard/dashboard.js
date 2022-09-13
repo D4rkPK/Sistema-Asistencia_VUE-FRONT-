@@ -29,16 +29,18 @@ export default {
     mostrarLateral: true,
     userLogged: {},
     menus: [
-      { nombre: 'Asistencia', icono: 'schedule', path: '/asistencia' },
-      { nombre: 'Practicantes', icono: 'person', path: '/practicantes' },
-      { nombre: 'Justificaciones', icono: 'description', path: '/justificaciones'},
-
-      { nombre: 'Areas', icono: 'medical_information', path: '/areas'},
-      { nombre: 'Puestos', icono: 'badge', path: '/puestos'},
-      { nombre: 'Universidades', icono: 'school', path: '/universidades'},
-
-
-
+      { nombre: 'Asistencia', icono: 'schedule', path: '/asistencia', submenu: [] },
+      { nombre: 'Practicantes', icono: 'person', path: '/practicantes', submenu: [] },
+      { nombre: 'Justificaciones', icono: 'description', path: '/justificaciones', submenu: [] },
+      { nombre: 'Reportes', icono: 'assignment', path: '/reportes', submenu: [] },
+      {
+        nombre: 'Gestiones', icono: 'build', path: '/carreras',
+        submenu: [
+          { nombre: 'Areas', icono: 'medical_information', path: '/areas' },
+          { nombre: 'Puestos', icono: 'badge', path: '/puestos' },
+          { nombre: 'Universidades', icono: 'school', path: '/universidades' },
+        ]
+      },
     ],
 
     IDLE_TIMEOUT: 3600,//TIEMPO DE SESSIÓN
