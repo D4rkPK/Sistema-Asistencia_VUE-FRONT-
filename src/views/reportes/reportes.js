@@ -1,4 +1,6 @@
 import * as XLSX from 'xlsx';
+import jsPDF from "jspdf";
+import autoTable from 'jspdf-autotable';
 export default {
     data() {
         return {
@@ -236,6 +238,46 @@ export default {
             const filename = 'REPORTE PRACTICANTES';
             XLSX.utils.book_append_sheet(workbook, data, filename)
             XLSX.writeFile(workbook, `${filename}.xlsx`)
+        },
+
+
+        async exportarPDF() {
+            var doc = new jsPDF({
+                orientation: 'p',
+                unit: 'mm',
+                format: 'legal',
+                //  putOnlyUsedFonts:true
+            })
+
+
+            doc.setFontSize(10)
+
+            autoTable(doc, {
+                head: [['NOMBRE', 'APELLIDO', 'ENTRADA', 'SALIDA', 'FECHA', 'ESTADO', 'AREA', 'UNIVERSIDAD']],
+                body: this.reporte.map((item) => {
+                    var estadoEx = '';
+                    if (item.estado == 1) {
+                        estadoEx = 'A TIEMPO';
+                    } else if (item.estado == -1) {
+                        estadoEx = 'FALTA';
+                    } else {
+                        estadoEx = 'TARDE';
+                    }
+                    return [
+                        
+                        item.nombre,
+                        item.apellido,
+                        item.entrada,
+                        item.salida,
+                        item.fecha,
+                        estadoEx,
+                        item.descripcion_area,
+                        item.nombre_universidad,
+                    ]
+                }),
+            })
+            doc.save('prueba.pdf')
+            // doc.output("dataurlnewwindow");
         },
     }
 }

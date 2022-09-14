@@ -128,7 +128,7 @@
                     color="warning"
                     elevation="2"
                     large
-                    @click="exportarReporte()"
+                    @click="exportarPDF()"
                   >
                     Exportar PDF
                     <v-icon class="mx-1">file_download</v-icon>
@@ -155,6 +155,7 @@
           </v-form>
           <hr class="mb-0" />
           <v-data-table
+            id="tablaExportar"
             :loading="loading"
             item-key="reporte.id + Math.random()"
             :headers="headers"
