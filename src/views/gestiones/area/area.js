@@ -24,7 +24,7 @@ export default {
           text: 'Descripción',	
           align: 'center',
           sortable: true,
-          value: 'descripcion',
+          value: 'descripcion_area',
         },
         {
           text: 'Encargado',

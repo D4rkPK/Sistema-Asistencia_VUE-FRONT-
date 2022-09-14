@@ -31,7 +31,7 @@ export default {
           text: 'Nombre',	
           align: 'center',
           sortable: true,
-          value: 'nombre',
+          value: 'nombre_universidad',
         },
         {
           text: 'Acciones',

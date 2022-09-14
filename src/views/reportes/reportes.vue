@@ -22,11 +22,12 @@
               <v-row>
                 <v-col cols="12" sm="3" md="3">
                   <v-select
-                    v-model="value"
+                    v-model="estado"
                     :rules="[rules.required]"
                     :loading="loadingBuscar"
-                    :items="years"
-                    item-text="anio"
+                    :items="itemsEstados"
+                    item-text="nombre"
+                    item-value="id"
                     prepend-icon="schedule"
                     label="Seleccionar Estado*"
                     @change="disableExport = true"
@@ -35,53 +36,73 @@
                   ></v-select>
                 </v-col>
                 <v-col cols="12" sm="3" md="3">
-                  <v-autocomplete
-                    v-model="buscarProducto"
+                  <v-menu
+                    v-model="menu2"
+                    :close-on-content-click="false"
+                    transition="scale-transition"
+                    offset-y
+                    max-width="290px"
+                    min-width="auto"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field
+                        v-model="dateRangeText"
+                        label="Seleccionar Rango de Fechas*"
+                        :rules="[rules.required]"
+                        hint="Formato MM/DD/YYYY"
+                        prepend-icon="mdi-calendar"
+                        readonly
+                        v-bind="attrs"
+                        v-on="on"
+                        @change="disableExport = true"
+                        required
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                      v-model="dates"
+                      range
+                      no-title
+                    >
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      text
+                      color="primary"
+                      @click="menu2 = false"
+                    >
+                      Cerrar
+                    </v-btn>
+                    </v-date-picker>
+                  </v-menu>
+                </v-col>
+                <v-col cols="12" sm="3" md="3">
+                  <v-select
+                    v-model="area"
                     :rules="[rules.required]"
                     :loading="loadingBuscar"
-                    :items="productos"
-                    item-text="descripcion"
+                    :items="itemsArea"
+                    item-text="descripcion_area"
                     item-value="id"
-                    prepend-icon="mdi-calendar"
-                    label="Seleccionar Período*"
+                    prepend-icon="medical_information"
+                    label="Seleccionar Área*"
                     @change="disableExport = true"
                     :disabled="disableButton"
                     required
-                  ></v-autocomplete>
+                  ></v-select>
                 </v-col>
                 <v-col cols="12" sm="3" md="3">
-                  <v-autocomplete
-                    v-model="buscarLicencia"
+                  <v-select
+                    v-model="universidad"
                     :rules="[rules.required]"
                     :loading="loadingBuscar"
-                    :items="licencias"
-                    item-text="numero_licencia"
-                    return-object
-                    prepend-icon="medical_information"
-                    label="Seleccionar Área*"
-                    @change="
-                      changeLicencia(buscarLicencia), (disableExport = true)
-                    "
-                    :disabled="disableButton"
-                    required
-                  ></v-autocomplete>
-                </v-col>
-                <v-col cols="12" sm="3" md="3">
-                  <v-autocomplete
-                    v-model="buscarLicencia"
-                    :rules="[rules.required]"
-                    :loading="loadingBuscar"
-                    :items="licencias"
-                    item-text="numero_licencia"
-                    return-object
+                    :items="itemsUniversidades"
+                    item-text="nombre_universidad"
+                    item-value="id"
                     prepend-icon="school"
                     label="Seleccionar Universidad*"
-                    @change="
-                      changeLicencia(buscarLicencia), (disableExport = true)
-                    "
+                    @change="disableExport = true"
                     :disabled="disableButton"
                     required
-                  ></v-autocomplete>
+                  ></v-select>
                 </v-col>
                 <v-col cols="12" sm="6" md="3">
                   <v-btn
@@ -92,7 +113,7 @@
                     color="primary"
                     elevation="2"
                     large
-                    @click="buscarPresentacion(buscarProducto, value)"
+                    @click="buscarReporte()"
                   >
                     Buscar
                     <v-icon class="mx-1">search</v-icon>
@@ -123,7 +144,7 @@
                     color="success"
                     elevation="2"
                     large
-                    @click="exportarExcelAnual()"
+                    @click="exportarExcel()"
                   >
                     Exportar EXCEL
                     <v-icon class="mx-1">file_download</v-icon>
@@ -135,13 +156,19 @@
           <hr class="mb-0" />
           <v-data-table
             :loading="loading"
-            :search="search"
+            item-key="reporte.id + Math.random()"
             :headers="headers"
-            :items="listado"
+            :items="reporte"
             :items-per-page="-1"
             :hide-default-footer="true"
             class="elevation-1 mt-0"
           >
+          <template v-slot:[`item.estado`]="{ item }">
+            <v-icon v-if="item.estado == 1" color="green">alarm_on</v-icon>
+            <v-icon v-else-if="item.estado == -1" color="red">timer_off</v-icon>
+            <v-icon v-else-if="item.estado == -2" color="warning">alarm_off</v-icon>
+          </template>
+          
           </v-data-table>
         </div>
       </div>

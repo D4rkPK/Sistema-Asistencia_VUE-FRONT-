@@ -1,37 +1,30 @@
-import { mapGetters } from "vuex";
-//import * as XLSX from 'xlsx';
+import * as XLSX from 'xlsx';
 export default {
     data() {
         return {
-            search: '',
+            dates: ['', ''],
+            menu2: false,
             loading: false,
             loadingBuscar: false,
-            disableDepartamentos: true,
-            disableMunicipios: true,
             disableButton: false,
             disableExport: true,
-            value: null,
-            years: [],
-            productos: [],
-            licencias: [],
-            departamentos: [],
-            municipios: [],
-            nombreReporte: '',
-            buscarProducto: null,
-            buscarLicencia: null,
-            buscarDepartamento: { id: -1, nombre: 'TODOS' },
-            buscarMunicipio: { municipio_id: -1, nombre: 'TODOS' },
-            productoEncontrado: null,
+
+            estado: null,
+            area: null,
+            universidad: null,
+            itemsEstados: [{ id: 2, nombre: 'TODOS' }, { id: 1, nombre: 'A TIEMPO' }, { id: -2, nombre: 'TARDE' }, { id: -1, nombre: 'FALTANTE' }],
+            itemsArea: [],
+            itemsUniversidades: [],
             reporte: [],
-            totalReporte: [],
             headers: [
-                { text: "Nombre", align: "center", sortable: true, value: "estudiante.full_name", },
+                { text: "Nombre", align: "center", sortable: true, value: "nombre", },
+                { text: "Apellido", align: "center", sortable: true, value: "apellido", },
                 { text: "Entrada", align: "center", sortable: true, value: "entrada", },
                 { text: "Salida", align: "center", sortable: true, value: "salida", },
                 { text: "Fecha", align: "center", sortable: true, value: "fecha", },
                 { text: "Estado", align: "center", sortable: true, value: "estado", },
-                { text: "Área", align: "center", sortable: true, value: "area", },
-                { text: "Universidad", align: "center", sortable: true, value: "universidad", },
+                { text: "Área", align: "center", sortable: true, value: "descripcion_area", },
+                { text: "Universidad", align: "center", sortable: true, value: "nombre_universidad", },
 
             ],
             rules: {
@@ -41,131 +34,76 @@ export default {
     },
 
     async created() {
+        await this.listarAreas();
+        await this.listarUniversidades();
         this.disableButton = false;
         this.loadingBuscar = false;
         this.loadingDate = false;
-        let sistema_id = atob(sessionStorage.getItem('SSS'));
-        this.menu === null || this.menu.length === 0 ? store.dispatch("setReloadMenu", sistema_id) : console.log(this.menu);
     },
 
     computed: {
-        ...mapGetters([
-            'services', 'menu', 'cambio'
-        ]),
+        dateRangeText() {
+            return this.dates.join(' ~ ')
+        },
     },
 
     methods: {
-        getMesLetras(date) {
-            let mes = parseInt(date);
-            mes = mes === 1 ? 'Enero' : mes;
-            mes = mes === 2 ? 'Febrero' : mes;
-            mes = mes === 3 ? 'Marzo' : mes;
-            mes = mes === 4 ? 'Abril' : mes;
-            mes = mes === 5 ? 'Mayo' : mes;
-            mes = mes === 6 ? 'Junio' : mes;
-            mes = mes === 7 ? 'Julio' : mes;
-            mes = mes === 8 ? 'Agosto' : mes;
-            mes = mes === 9 ? 'Septiembre' : mes;
-            mes = mes === 10 ? 'Octubre' : mes;
-            mes = mes === 11 ? 'Noviembre' : mes;
-            mes = mes === 12 ? 'Diciembre' : mes;
-            return mes;
-        },
-
-        async listarAnios() {
-            try {
-                this.disableButton = true;
-                this.loadingBuscar = true;
-                let r = await this.$store.state.services.calendarioService.listarAnios();
-                if (r.status === 200) {
-                    this.years = r.data.data;
-                } else {
-                    this.$toast.error('A OCURRIDO UN ERROR AL INTENTAR OBTENER LOS AÑOS', { position: "top-right" });
-                }
-            } catch (error) {
-                this.$toast.error('A OCURRIDO UN ERROR AL INTENTAR OBTENER LOS AÑOS', { position: "top-right" });
-            }
-        },
-
-        async listarProductos() {
-            try {
-                this.disableButton = true;
-                this.loadingBuscar = true;
-                let r = await this.$store.state.services.productosService.listar();
-                console.log('r.data. PRODUCTOS');
-                console.log(r.data);
-                this.productos = r.data.data;
-            } catch (error) {
-                this.loading = false;
-                this.$toast.error('Ocurrio un error al intentar obtener los productos', { position: "top-right" });
-            }
-        },
-
-        async listarLicencias() {
+        async listarAreas() {
             try {
                 this.disableButton = true;
                 this.loadingDate = true;
-                let r = await this.$store.state.services.licenciaService.listar();
-                console.log('LICENCIAS', r.data.data);
+                let r = await this.$store.state.services.areaService.listar();
+                console.log('AREAS', r.data.data);
                 if (r.status === 200) {
-                    this.licencias = r.data.data;
-                    this.licencias.unshift({ id: -1, numero_licencia: 'TODOS' });
+                    this.itemsArea = r.data.data;
+                    this.itemsArea.unshift({ id: -1, descripcion_area: 'TODOS' });
                 } else {
-                    this.$toast.error('A OCURRIDO UN ERROR AL INTENTAR OBTENER LOS AÑOS', { position: "top-right" });
+                    this.$toast.error('A OCURRIDO UN ERROR AL INTENTAR OBTENER LAS AREAS', { position: "top-right" });
                 }
             } catch (error) {
-                this.$toast.error('A OCURRIDO UN ERROR AL INTENTAR OBTENER LOS AÑOS', { position: "top-right" });
+                this.$toast.error('A OCURRIDO UN ERROR AL INTENTAR OBTENER LAS AREAS', { position: "top-right" });
             }
         },
 
-        async listarDepartamentos() {
+        async listarUniversidades() {
             try {
-                this.loading = true;
-                let r = await this.$store.state.services.departamentosGTService.listar();
-                console.log('r.data. DEPARTAMENTOS');
-                console.log(r.data);
-                this.departamentos = r.data.data;
-                this.departamentos.unshift({ id: -1, nombre: 'TODOS' });
-                this.loading = false;
-            } catch (error) {
-                this.loading = false;
-                this.$toast.error('Ocurrio un error al intentar obtener los departamentos', { position: "top-right" });
-            }
-        },
-
-        changeLicencia(lic) {
-            if (lic.id != -1) {
-                this.disableDepartamentos = true;
-            } else {
-                this.disableDepartamentos = false;
-            }
-        },
-
-        async changeDepartamento(id) {
-            console.log('dept', id);
-            if (id != -1) {
-                try {
-                    this.loading = true;
-                    /* this.itemMunicipios = null; */
-                    let r = await this.$store.state.services.departamentosGTService.municipios(id);
-                    r.data.data.filter(x => x.municipio_id = x.id);
-                    console.log('MUNICIPIOS', r.data.data);
-                    this.municipios = r.data.data;
-                    this.municipios.unshift({ municipio_id: -1, nombre: 'TODOS' });
-                    this.loading = false;
-                    this.disableMunicipios = false;
-
-                } catch (error) {
-                    this.loading = false;
-                    this.$toast.error('Ocurrio un error al intentar obtener los Municipios', { position: "top-right" });
+                this.disableButton = true;
+                this.loadingDate = true;
+                let r = await this.$store.state.services.universidadService.listar();
+                console.log('UNIVERSIDADES', r.data.data);
+                if (r.status === 200) {
+                    this.itemsUniversidades = r.data.data;
+                    this.itemsUniversidades.unshift({ id: -1, nombre_universidad: 'TODOS' });
+                } else {
+                    this.$toast.error('A OCURRIDO UN ERROR AL INTENTAR OBTENER LAS UNIVERSIDADES', { position: "top-right" });
                 }
-            } else {
-                this.buscarMunicipio = { municipio_id: -1, nombre: 'TODOS' };
-                this.disableMunicipios = true;
+            } catch (error) {
+                this.$toast.error('A OCURRIDO UN ERROR AL INTENTAR OBTENER LAS UNIVERSIDADES', { position: "top-right" });
             }
         },
 
-        async buscarPresentacion(producto, anio) {
+        async buscarReporte() {
+            try {
+                this.disableButton = true;
+                this.loadingBuscar = true;
+                console.log('this.buscar', { estado: this.estado, fechas: this.dates, area: this.area, universidad: this.universidad });
+                let r = await this.$store.state.services.reportesService.reporteLicencias({ estado: this.estado, fechas: this.dates, area: this.area, universidad: this.universidad });
+                console.log('r.data. REPORTE');
+                console.log(r.data);
+                this.reporte = r.data.data;
+                this.disableButton = false;
+                this.loadingBuscar = false;
+                this.disableButton = false;
+                this.disableExport = false;
+            } catch (error) {
+                this.disableButton = false;
+                this.loadingBuscar = false;
+                this.$toast.error('Ocurrio un error al intentar obtener el reporte', { position: "top-right" });
+            }
+        },
+
+
+        /* async buscarPresentacion(producto, anio) {
             if (this.$refs.form.validate()) {
                 this.loading = true;
                 this.disableButton = true;
@@ -227,74 +165,75 @@ export default {
                     this.$toast.error('A ocurrido un error al tratar de obtener los productos ' + error, { position: "top-right" });
                 }
             }
-        },
+        }, */
 
-        convertirNumero(numero) {
-            let dollarUSLocale = Intl.NumberFormat('en-US', { minimumFractionDigits: 2 });
-            return dollarUSLocale.format(parseFloat(numero).toFixed(2))
-        },
-
-        async exportarReporte() {
-            this.loading = true;
-            this.disableButton = true;
-            this.disableExport = true;
-            console.log("GENERANDO REPORTE... ");
-            this.nombreReporte = null;
-
-            if (this.buscarLicencia.id === -1 && this.buscarDepartamento.id === -1 && this.buscarMunicipio.municipio_id === -1) {
-                this.nombreReporte = ` Todas las licencias`;
-            } else if (this.buscarLicencia.id === -1 && this.buscarDepartamento.id != -1 && this.buscarMunicipio.municipio_id === -1) {
-                this.nombreReporte = ` Departamento ${this.buscarDepartamento.nombre}`
-            } else if (this.buscarLicencia.id === -1 && this.buscarDepartamento.id != -1 && this.buscarMunicipio.municipio_id != -1) {
-                this.nombreReporte = ` ${this.buscarDepartamento.nombre} ${this.buscarMunicipio.nombre}`
-            } else {
-                this.nombreReporte = ` Licencia ${this.buscarLicencia.numero_licencia}`;
-            }
-            await this.$store.state.services.productosService.generarReporte({ items: this.reporte, totales: this.totalReporte, anio: this.value, producto: this.productoEncontrado, nombreReporte: this.nombreReporte })
-                .then(async (r) => {
-                    console.log('REPORTE', r);
-                    let link = document.createElement('a')
-                    link.style.display = 'none'
-                    link.href = r.data.data
-                    link.setAttribute('download', `REPORTE PRODUCTOS ${this.value} ${this.productoEncontrado} ${this.nombreReporte}.pdf`)
-                    /* link.setAttribute('download', `REPORTE PRODUCTOS ${this.value} ${this.productoEncontrado}.pdf`) */
-                    document.body.appendChild(link)
-                    link.click()
-                    this.loading = false;
-                    this.disableButton = false;
-                    this.disableExport = false;
-                    this.$toast.success(`Reporte generado.`, { timeout: 3000, position: "top-right" });
-                    /*             await this.listarRoles(); */
-                })
-                .catch((e) => {
-                    this.loading = false;
-                    this.disableButton = false;
-                    this.disableExport = false;
-                    if (e.response) {
-                        this.$toast.error(e.response.data.message, { position: 'top-right' });
+        /*         async exportarReporte() {
+                    this.loading = true;
+                    this.disableButton = true;
+                    this.disableExport = true;
+                    console.log("GENERANDO REPORTE... ");
+                    this.nombreReporte = null;
+        
+                    if (this.buscarLicencia.id === -1 && this.buscarDepartamento.id === -1 && this.buscarMunicipio.municipio_id === -1) {
+                        this.nombreReporte = ` Todas las licencias`;
+                    } else if (this.buscarLicencia.id === -1 && this.buscarDepartamento.id != -1 && this.buscarMunicipio.municipio_id === -1) {
+                        this.nombreReporte = ` Departamento ${this.buscarDepartamento.nombre}`
+                    } else if (this.buscarLicencia.id === -1 && this.buscarDepartamento.id != -1 && this.buscarMunicipio.municipio_id != -1) {
+                        this.nombreReporte = ` ${this.buscarDepartamento.nombre} ${this.buscarMunicipio.nombre}`
+                    } else {
+                        this.nombreReporte = ` Licencia ${this.buscarLicencia.numero_licencia}`;
                     }
-                });
-        },
+                    await this.$store.state.services.productosService.generarReporte({ items: this.reporte, totales: this.totalReporte, anio: this.value, producto: this.productoEncontrado, nombreReporte: this.nombreReporte })
+                        .then(async (r) => {
+                            console.log('REPORTE', r);
+                            let link = document.createElement('a')
+                            link.style.display = 'none'
+                            link.href = r.data.data
+                            link.setAttribute('download', `REPORTE PRODUCTOS ${this.value} ${this.productoEncontrado} ${this.nombreReporte}.pdf`)
+                            document.body.appendChild(link)
+                            link.click()
+                            this.loading = false;
+                            this.disableButton = false;
+                            this.disableExport = false;
+                            this.$toast.success(`Reporte generado.`, { timeout: 3000, position: "top-right" });
+                        })
+                        .catch((e) => {
+                            this.loading = false;
+                            this.disableButton = false;
+                            this.disableExport = false;
+                            if (e.response) {
+                                this.$toast.error(e.response.data.message, { position: 'top-right' });
+                            }
+                        });
+                }, */
 
-        exportarExcelAnual() {
+        exportarExcel() {
             let info = [];
             this.reporte.forEach(element => {
-
+                var estadoEx = '';
+                if (element.estado == 1) {
+                    estadoEx = 'A TIEMPO';
+                } else if (element.estado == -1) {
+                    estadoEx = 'FALTA';
+                } else {
+                    estadoEx = 'TARDE';
+                }
                 let data = {
-                    MES: element.mes,
-                    CANTIDAD_INFORMES: element.cantidadInformes,
-                    COMPRA_VOLUMEN: element.compraVolumentTotal,
-                    PRECIO_COMPRA_TOTAL: element.precioCompraTotal,
-                    VENTA_VOLUMEN: element.ventaVolumentTotal,
-                    PRECIO_VENTA_TOTAL: element.ventaPrecioVenta,
-                    CONSUMO_EXPEDIO: element.consumoExpendio,
+                    NOMBRE: element.nombre,
+                    APELLIDO: element.apellido,
+                    ENTRADA: element.entrada,
+                    SALIDA: element.salida,
+                    FECHA: element.fecha,
+                    ESTADO: estadoEx,
+                    AREA: element.descripcion_area,
+                    UNIVERSIDAD: element.nombre_universidad,
                 };
                 info.push(data);
             });
             console.log('REPORTE EXCEL', info);
             let data = XLSX.utils.json_to_sheet(info)
             const workbook = XLSX.utils.book_new()
-            const filename = 'REPORTE PRODUCTOS';
+            const filename = 'REPORTE PRACTICANTES';
             XLSX.utils.book_append_sheet(workbook, data, filename)
             XLSX.writeFile(workbook, `${filename}.xlsx`)
         },

@@ -171,7 +171,7 @@
                     v-model="estudiante.area_id"
                     :rules="[rules.required]"
                     :items="itemAreas"
-                    item-text="descripcion"
+                    item-text="descripcion_area"
                     item-value="id"
                     label="Área*"
                     required
@@ -182,7 +182,7 @@
                     v-model="estudiante.universidad_id"
                     :rules="[rules.required]"
                     :items="itemUniversidades"
-                    item-text="nombre"
+                    item-text="nombre_universidad"
                     item-value="id"
                     label="Universidad"
                     filled
@@ -193,7 +193,7 @@
                         <span left>
                           <strong>{{ data.item.abreviatura }}&nbsp;</strong>
                         </span>
-                        {{ data.item.nombre }}
+                        {{ data.item.nombre_universidad }}
                     </template>
                     <template v-slot:item="data">
                       <template v-if="typeof data.item !== 'object'">
@@ -205,7 +205,7 @@
                         </v-list-item-avatar>
                         <v-list-item-content>
                           <v-list-item-title
-                            v-html="data.item.nombre"
+                            v-html="data.item.nombre_universidad"
                           ></v-list-item-title>
                         </v-list-item-content>
                       </template>

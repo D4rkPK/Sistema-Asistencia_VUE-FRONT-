@@ -36,7 +36,7 @@
           <template v-slot:[`item.estado`]="{ item }">
             <v-icon v-if="item.estado == 1" color="green">alarm_on</v-icon>
             <v-icon v-else-if="item.estado == -1" color="red">timer_off</v-icon>
-            <v-icon v-else color="warning">alarm_off</v-icon>
+            <v-icon v-else-if="item.estado == -2" color="warning">alarm_off</v-icon>
           </template>
           </v-data-table>
         </div>

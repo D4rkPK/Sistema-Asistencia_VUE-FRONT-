@@ -8,6 +8,7 @@ import puestoService from "../services/puesto/puestoService.js";
 import universidadService from "../services/universidad/universidadService.js";
 import encargadosService from "../services/encargados/encargadosService.js";
 import registroService from "../services/registro/registroService.js";
+import reportesService from "../services/reportes/reportesService.js";
 
 let baseUrl = process.env.VUE_APP_SERVICE; //api
 
@@ -28,4 +29,5 @@ export default {//se cargan los servicios ubicados en la carpeta services
   universidadService: new universidadService(Axios, baseUrl),
   encargadosService: new encargadosService(Axios, baseUrl),
   registroService: new registroService(Axios, baseUrl),
+  reportesService: new reportesService(Axios, baseUrl),
 }

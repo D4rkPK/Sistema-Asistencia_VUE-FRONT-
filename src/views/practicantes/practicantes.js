@@ -67,13 +67,13 @@ export default {
           text: 'Area',
           align: 'center',
           sortable: true,
-          value: 'area.descripcion',
+          value: 'area.descripcion_area',
         },
         {
           text: 'Universidad',
           align: 'center',
           sortable: true,
-          value: 'universidad.nombre',
+          value: 'universidad.nombre_universidad',
         },
         {
           text: 'Estado Huella',
