@@ -92,7 +92,7 @@ export default {
         console.log("Editar universidads");
         this.universidad.id = this.item.id;
         this.universidad.abreviatura = this.item.abreviatura;
-        this.universidad.nombre = this.item.nombre;
+        this.universidad.nombre = this.item.nombre_universidad;
       } catch (error) {
         this.$toast.error('Ocurrio un error al intentar obtener al universidades', { position: "bottom-right" });
       }

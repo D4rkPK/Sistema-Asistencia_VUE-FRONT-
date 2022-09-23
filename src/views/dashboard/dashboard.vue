@@ -160,7 +160,7 @@
         <span>
           {{ userLogged.puesto.descripcion }}
         </span>
-        <span> | {{ userLogged.area.descripcion }} </span>
+        <span> | {{ userLogged.area.descripcion_area }} </span>
       </div>
       <v-avatar class="ml-5" size="40">
         <v-img

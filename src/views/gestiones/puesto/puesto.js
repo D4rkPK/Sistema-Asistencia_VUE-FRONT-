@@ -10,11 +10,11 @@ export default {
       search: "",
       puesto: {
         id: null,
-        puesto: "",
+        descripcion: "",
       },
       default_puesto: {
         id: null,
-        puesto: "",
+        descripcion: "",
       },
       itemAreas: [],
       headers: [
@@ -84,13 +84,7 @@ export default {
       try {
         console.log("Editar puestos");
         this.puesto.id = this.item.id;
-        this.puesto.cui = this.item.cui;
-        this.puesto.correo = this.item.correo;
-        this.puesto.carne = this.item.carne;
-        this.puesto.nombre = this.item.nombre;
-        this.puesto.apellido = this.item.apellido;
-        this.puesto.area_id = parseInt(this.item.area_id);
-        this.puesto.universidad_id = parseInt(this.item.universidad_id);
+        this.puesto.descripcion = this.item.descripcion;
       } catch (error) {
         this.$toast.error("Ocurrio un error al intentar obtener al puesto", {
           position: "bottom-right",

@@ -12,11 +12,22 @@ export default {
                 id: null,
                 comentario: "",
                 estado_comentario: "",
+                horario_asignado_id: "",
+                entrada: "",
+                salida: "",
+                fecha: "",
+                estado: "",
+
             },
             default_justificacion: {
                 id: null,
                 comentario: "",
                 estado_comentario: "",
+                horario_asignado_id: "",
+                entrada: "",
+                salida: "",
+                fecha: "",
+                estado: "",
             },
             ItemEstado_comentario: [{ text: "Aprobado", value: 1, }, { text: "Rechazado", value: -1 }],
             itemAreas: [],
@@ -99,6 +110,11 @@ export default {
                 this.justificacion.id = item.id;
                 this.justificacion.comentario = item.comentario;
                 this.justificacion.estado_comentario = item.estado_comentario;
+                this.justificacion.horario_asignado_id = item.horario_asignado_id;
+                this.justificacion.entrada = item.salida;
+                this.justificacion.salida = item.salida;
+                this.justificacion.fecha = item.fecha;
+                this.justificacion.estado = item.estado;
                 this.dialog = true;
             } catch (error) {
                 this.$toast.error(
