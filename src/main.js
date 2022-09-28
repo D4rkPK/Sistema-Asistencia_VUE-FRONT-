@@ -6,12 +6,15 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
-
 /*
 *Toast notifaciones
 */
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
+
+/* 
+*Ditigital clock
+*/
 
 Vue.config.productionTip = false
 

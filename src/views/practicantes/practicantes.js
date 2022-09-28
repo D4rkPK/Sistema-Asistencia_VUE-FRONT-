@@ -30,6 +30,9 @@ export default {
         area_id: '',
         universidad_id: '',
       },
+      horario_id: null,
+      
+      itemHorarios: [],
       itemAreas: [],
       itemUniversidades: [],
       headers: [
@@ -88,6 +91,12 @@ export default {
           value: 'huella',
         },
         {
+          text: 'Horario',
+          align: 'center',
+          sortable: false,
+          value: 'id',
+        },
+        {
           text: 'Acciones',
           align: 'center',
           sortable: false,
@@ -115,6 +124,7 @@ export default {
 
   methods: {
     async dialogForm(item) {
+      await this.listarHorarios();
       await this.listarAreas();
       await this.listarUniversidades();
       console.log(item, "item");
@@ -149,6 +159,20 @@ export default {
       } catch (error) {
         this.loading = false;
         this.$toast.error('Ocurrio un error al intentar obtener los estudiantes', { position: "top-right" });
+      }
+    },
+
+    async listarHorarios() {
+      try {
+        this.loading = true;
+        let r = await this.$store.state.services.horarioService.listar();
+        console.log('r.data. HORARIOS');
+        console.log(r.data.data);
+        this.itemHorarios = r.data.data;
+        this.loading = false;
+      } catch (error) {
+        this.loading = false;
+        this.$toast.error('Ocurrio un error al intentar obtener los horarios', { position: "top-right" });
       }
     },
 
@@ -191,6 +215,16 @@ export default {
         this.estudiante.apellido = this.item.apellido;
         this.estudiante.area_id = parseInt(this.item.area_id);
         this.estudiante.universidad_id = parseInt(this.item.universidad_id);
+
+        try {
+          let r = await this.$store.state.services.horarioAsignadoService.show(this.item.id);
+          console.log(r.data, 'HORARIOS ASIGNADOS');
+          this.horario_id = r.data[0].horario_id;
+          console.log(this.horario_id, 'HORARIO ID');
+        } catch (error) {
+          console.log(error);
+        }
+
       } catch (error) {
         this.$toast.error('Ocurrio un error al intentar obtener al estudiante', { position: "top-right" });
       }
@@ -202,6 +236,8 @@ export default {
         console.log(this.estudiante, "estudiante GUARDADO");
         await this.$store.state.services.practicantesService.guardar(this.estudiante)
           .then(async () => {
+            await this.$store.state.services.horarioAsignadoService.guardar({estudiante: this.estudiante.cui, horario: this.horario_id})
+            .then(async () => {
             this.loading = false;
             this.$toast.success('Datos guardados con éxito', { position: "top-right" });
             this.closeDialog();
@@ -213,6 +249,12 @@ export default {
               this.$toast.error(e.response.data.message, { position: 'top-right' });
             }
           });
+        }).catch((e) => {
+          this.loading = false;
+          if (e.response) {
+            this.$toast.error(e.response.data.message, { position: 'top-right' });
+          }
+        });
       } else {
         this.$toast.error("Debe llenar los campos obligatorios", { position: 'top-right' })
       }

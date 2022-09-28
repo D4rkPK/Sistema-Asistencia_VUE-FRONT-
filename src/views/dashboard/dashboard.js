@@ -36,6 +36,7 @@ export default {
       {
         nombre: 'Gestiones', icono: 'build', path: '/carreras',
         submenu: [
+          { nombre: 'Horarios', icono: 'schedule', path: '/horarios' },
           { nombre: 'Areas', icono: 'medical_information', path: '/areas' },
           { nombre: 'Puestos', icono: 'badge', path: '/puestos' },
           { nombre: 'Universidades', icono: 'school', path: '/universidades' },

@@ -48,7 +48,7 @@
                       <v-text-field
                         v-model="dateRangeText"
                         label="Seleccionar Rango de Fechas*"
-                        :rules="[rules.required]"
+                        :rules="[rules.required, rules.dateRange]"
                         hint="Formato MM/DD/YYYY"
                         prepend-icon="mdi-calendar"
                         readonly

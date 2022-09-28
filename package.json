@@ -11,10 +11,6 @@
     "dev": "vue-cli-service serve --mode dev"
   },
   "dependencies": {
-    "@digitalpersona/authentication": "^0.2.6",
-    "@digitalpersona/core": "^0.2.6",
-    "@digitalpersona/enrollment": "^0.2.9",
-    "@digitalpersona/services": "^0.2.8",
     "@mdi/font": "^5.9.55",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",

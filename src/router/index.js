@@ -26,6 +26,7 @@ import Justificaciones from '../views/justificaciones/justificaciones.vue';
 import Reportes from '../views/reportes/reportes.vue';
 
 // GESTIONES
+import horario from '@/views/gestiones/horario/horario.vue';
 import Areas from '../views/gestiones/area/area.vue';
 import Puestos from '../views/gestiones/puesto/puesto.vue';
 import Universidades from '../views/gestiones/universidad/universidad.vue';
@@ -84,6 +85,11 @@ const routes = [
         path: '/reportes',
         name: 'reportes',
         component: Reportes
+      },
+      {
+        path: '/horarios',
+        name: 'horarios',
+        component: horario
       },
       { 
         path: '/areas',

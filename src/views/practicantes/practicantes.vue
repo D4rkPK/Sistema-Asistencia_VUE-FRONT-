@@ -69,6 +69,10 @@
               </v-tooltip>
             </template>
 
+            <template v-slot:[`item.horario`]="{ item }">
+                <span>{{item}}</span>
+              <!-- Encontrar horario asignado del estudiante -->
+            </template>
 
             <template v-slot:[`item.acciones`]="{ item }">
               <v-tooltip bottom color="primary">
@@ -165,8 +169,18 @@
                     label="Apellido*"
                   ></v-text-field>
                 </v-col>
-
-                <v-col cols="12" sm="6" md="6">
+                <v-col cols="12" sm="4" md="4">
+                  <v-select
+                    v-model="horario_id"
+                    :rules="[rules.required]"
+                    :items="itemHorarios"
+                    item-text="descripcion"
+                    item-value="id"
+                    label="Horario*"
+                    required
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" sm="4" md="4">
                   <v-select
                     v-model="estudiante.area_id"
                     :rules="[rules.required]"
@@ -177,7 +191,7 @@
                     required
                   ></v-select>
                 </v-col>
-                <v-col cols="12" sm="6" md="6">
+                <v-col cols="12" sm="4" md="4">
                   <v-select
                     v-model="estudiante.universidad_id"
                     :rules="[rules.required]"
