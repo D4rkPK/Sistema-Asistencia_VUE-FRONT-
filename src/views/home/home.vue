@@ -52,7 +52,9 @@
                       </p>
                     </v-card-text>
                     <v-card-actions>
-                      <v-btn width="150" color="var(--hospital-walls)">
+                      <v-btn width="150" color="var(--hospital-walls)" 
+                      @click="FingerprintSdk()"
+                      >
                         Entrar
                       </v-btn>
                     </v-card-actions>
