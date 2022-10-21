@@ -1,19 +1,15 @@
+import { digitalTimePicker} from "vuetify-more-component";
+
 export default {
+  components: {
+    digitalTimePicker,
+  },
   data() {
     return {
       /* Time Picker */
-      minHour: 0,
-      maxHour: 23,
-      hour: 0,
-      minMinute: 0,
-      maxMinute: 59,
-      minute: 0,
+      menu: null,
+      menu2: null,
       /* /Time Picker */
-
-      time1: false,
-      time2: false,
-      modal1: false,
-      modal2: false,
 
       dialog: false,
       dialogConfirm: false,
@@ -29,6 +25,7 @@ export default {
       },
       default_horario: {
         id: null,
+        descripcion: "",
         hora_entrada: "",
         hora_salida: "",
       },
@@ -62,68 +59,20 @@ export default {
       listado: [],
       rules: {
         required: (value) => !!value || "Requerido.",
+        /* hora de entrada no puede ser mayor a la de salida */
+        hora_salida: (value) => {
+          if (value <= this.horario.hora_entrada) {
+            return "La hora de salida no puede ser menor a la de entrada";
+          } else {
+            return true;
+          }
+        },
       },
     };
   },
   async created() {
     await this.listarHorario();
   },
-  computed: {
-    hourModel: {
-      get() {
-        return this.forceTwoDigits(this.hour);
-      },
-      set(v) {
-        this.hour = Number(v);
-      },
-    },
-    minuteModel: {
-      get() {
-        return this.forceTwoDigits(this.minute);
-      },
-      set(v) {
-        this.minute = Number(v);
-      },
-    },
-    fullTimeModel: {
-      get() {
-        return `${this.hourModel}:${this.minuteModel}`;
-      },
-      set(v) {
-        const [h, m] = v.split(":");
-        this.hourModel = h;
-        this.minuteModel = m;
-      },
-    },
-  },
-  watch: {
-    hour: function (hour) {
-      this.$nextTick(() => {
-        if (hour < this.minHour) this.hour = this.minHour;
-        if (hour > this.maxHour) this.hour = this.maxHour;
-      });
-    },
-    minute: function (minute) {
-      this.$nextTick(() => {
-        if (minute < this.minMinute) this.minute = this.minMinute;
-        if (minute > this.maxMinute) this.minute = this.maxMinute;
-      });
-    },
-    /* si time se cierra  */
-    time1: function (time1) {
-      this.$nextTick(() => {
-        if (time1 == false) this.minute = 0;
-        this.hour = 0;
-      });
-    },
-    time2: function (time2) {
-      this.$nextTick(() => {
-        if (time2 == false) this.minute = 0;
-        this.hour = 0;
-      });
-    },
-  },
-
   methods: {
     async dialogForm(item) {
       await this.listarEncargados();
@@ -189,6 +138,7 @@ export default {
         this.horario.descripcion = this.item.descripcion;
         this.horario.hora_entrada = this.item.hora_entrada;
         this.horario.hora_salida = this.item.hora_salida;
+        console.log(this.horario);
       } catch (error) {
         this.$toast.error("Ocurrio un error al intentar obtener el horario", {
           position: "bottom-right",
@@ -287,41 +237,8 @@ export default {
       this.$refs.form.resetValidation();
       this.horario = Object.assign(this.horario, this.default_horario);
       this.dialog = false;
-    },
-
-    forceTwoDigits(num) {
-      return (num < 10 ? "0" : "") + num;
-    },
-    onAddHourClicked() {
-      this.hour < this.maxHour ? (this.hour += 1) : (this.hour = this.minHour);
-    },
-    onSubtractHourClicked() {
-      this.hour > this.minHour ? (this.hour -= 1) : (this.hour = this.maxHour);
-    },
-    onAddMinuteClicked() {
-      this.minute < this.maxMinute
-        ? (this.minute += 1)
-        : (this.minute = this.minMinute);
-    },
-    onSubtractMinuteClicked() {
-      this.minute > this.minMinute
-        ? (this.minute -= 1)
-        : (this.minute = this.maxMinute);
-    },
-
-    saveTime(type) {
-      console.log("saveTime", type);
-      if (type == 1) {
-        this.horario.hora_entrada = this.fullTimeModel;
-      } else if (type == 2) {
-        this.horario.hora_salida = this.fullTimeModel;
-      } else {
-        console.log("Invalid type");
-      }
-      this.hour = 0;
-      this.minute = 0;
-      this.time1 = false;
-      this.time2 = false;
+      this.menu = null;
+      this.menu2 = null;
     },
   },
 };

@@ -38,7 +38,7 @@ export default {
         submenu: [
           { nombre: 'Horarios', icono: 'schedule', path: '/horarios' },
           { nombre: 'Areas', icono: 'medical_information', path: '/areas' },
-          { nombre: 'Puestos', icono: 'badge', path: '/puestos' },
+          /* { nombre: 'Puestos', icono: 'badge', path: '/puestos' }, */
           { nombre: 'Universidades', icono: 'school', path: '/universidades' },
         ]
       },

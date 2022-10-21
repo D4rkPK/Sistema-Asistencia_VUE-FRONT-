@@ -43,13 +43,14 @@
             :footer-props="{ 'items-per-page-options': [20, 50, 100] }"
             class="elevation-1 mt-0"
           >
+            <template v-slot:[`item.estado_huella`]="{ item }">
+              <v-icon v-if="item.estado_huella == 1" color="green"
+                >mdi-check</v-icon
+              >
+              <v-icon v-else color="red">mdi-close</v-icon>
+            </template>
 
-          <template v-slot:[`item.estado_huella`]="{ item }">
-            <v-icon v-if="item.estado_huella == 1" color="green">mdi-check</v-icon>
-            <v-icon v-else color="red">mdi-close</v-icon>
-          </template>
-
-          <template v-slot:[`item.huella`]="{ item }">
+            <template v-slot:[`item.huella`]="{ item }">
               <v-tooltip bottom color="primary">
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
@@ -70,7 +71,7 @@
             </template>
 
             <template v-slot:[`item.horario`]="{ item }">
-                <span>{{item}}</span>
+              <span>{{ item }}</span>
               <!-- Encontrar horario asignado del estudiante -->
             </template>
 
@@ -204,14 +205,16 @@
                     color="blue-grey lighten-2"
                   >
                     <template v-slot:selection="data">
-                        <span left>
-                          <strong>{{ data.item.abreviatura }}&nbsp;</strong>
-                        </span>
-                        {{ data.item.nombre_universidad }}
+                      <span left>
+                        <strong>{{ data.item.abreviatura }}&nbsp;</strong>
+                      </span>
+                      {{ data.item.nombre_universidad }}
                     </template>
                     <template v-slot:item="data">
                       <template v-if="typeof data.item !== 'object'">
-                        <v-list-item-content v-text="data.item"></v-list-item-content>
+                        <v-list-item-content
+                          v-text="data.item"
+                        ></v-list-item-content>
                       </template>
                       <template v-else>
                         <v-list-item-avatar>
@@ -232,7 +235,7 @@
         </v-form>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">
+          <v-btn color="blue darken-1" text @click="closeDialog()">
             Cerrar
           </v-btn>
           <v-btn
@@ -265,8 +268,8 @@
           <strong>DPI: </strong>{{ item.cui }} <br />
           <strong>Nombre: </strong>{{ item.nombre }} <br />
           <strong>Apellido: </strong>{{ item.apellido }} <br />
-          <strong>Área: </strong>{{ item.area.descripcion }} <br />
-          <strong>Universidad: </strong>{{ item.universidad.nombre }} <br />
+          <strong>Área: </strong>{{ item.area.descripcion_area }} <br />
+          <strong>Universidad: </strong>{{ item.universidad.nombre_universidad }} <br />
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -281,8 +284,4 @@
     </v-dialog>
   </div>
 </template>
-<script src="es6-shim.js"></script>
-<script src=" websdk.client.bundle.min.js"></script>
-<script src=" fingerprint.sdk.min.js"></script>
 <script src="./practicantes.js"></script>
-

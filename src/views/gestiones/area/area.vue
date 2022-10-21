@@ -82,33 +82,21 @@
     </div>
 
     <!-- DIALOG editar o crear -->
-    <v-dialog v-model="dialog" persistent max-width="1000px">
+    <v-dialog v-model="dialog" persistent max-width="400px">
       <v-card>
         <v-form ref="form">
           <v-card-title>
-            <span class="text-h5"> {{ type }} area </span>
+            <span class="text-h5"> {{ type }} área </span>
           </v-card-title>
           <v-card-text>
             <v-container>
               <v-row>
-                <v-col cols="12" sm="6" md="6">
+                <v-col cols="12" sm="12" md="12">
                   <v-text-field
-                    v-model="area.descripcion"
+                    v-model="area.descripcion_area"
                     :rules="[rules.required]"
                     label="Nombre*"
                   ></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="6" md="6">
-                  <v-select
-                    v-model="area.user_id"
-                    :rules="[rules.required]"
-                    :items="itemEncargados"
-                    item-text="nombre"
-                    item-value="id"
-                    label="Encargado*"
-                    required
-                  >
-                  </v-select>
                 </v-col>
               </v-row>
             </v-container>
@@ -143,12 +131,10 @@
     <v-dialog v-model="dialogConfirm" persistent max-width="300px">
       <v-card>
         <v-card-title class="text-h5">
-          Esta seguro que desea eliminar este area
+          Esta seguro que desea eliminar este área
         </v-card-title>
         <v-card-text v-if="item != null">
-          <strong>CUI:</strong>{{ item.cui }} <br />
-          <strong>Nombre:</strong>{{ item.primer_nombre }} <br />
-          <strong>Apellido:</strong>{{ item.primer_apellido }} <br />
+          <strong>Nombre:</strong>{{ item.descripcion_area }} <br />
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>

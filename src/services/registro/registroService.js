@@ -32,6 +32,11 @@ class registroService {
       let ruta = `${this.baseUrl}/delete/${id}`;
       return this.axios.delete(ruta, data);
     }
+
+    validar(data){
+      let ruta = `${this.baseUrl}/validarAsistencia`;
+      return this.axios.post(ruta, data);
+    }
   }
   export default registroService;
   

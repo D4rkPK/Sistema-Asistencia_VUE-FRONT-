@@ -7,6 +7,8 @@ export default {
       loading: false,
       item: null,
       type: null,
+      menu: null,
+      fecha: null,
       search: "",
       estudiante: {
         id: null,
@@ -65,6 +67,9 @@ export default {
         },
       ],
       listado: [],
+      rules: {
+        required: (value) => !!value || "Requerido.",
+      },
     };
   },
   async created() {
@@ -94,5 +99,33 @@ export default {
         );
       }
     },
+
+    async validarFaltantes(fecha) {
+      console.log('Fecha', fecha);
+      if (this.$refs.form.validate()) {
+        this.loading = true;
+        await this.$store.state.services.registroService
+          .validar({fecha: fecha})
+          .then(async () => {
+            this.loading = false;
+            this.$toast.success("Faltantes Generado con éxito", {
+              position: "bottom-right",
+            });
+            await this.listarAsistencia();
+          })
+          .catch((e) => {
+            this.loading = false;
+            if (e.response) {
+              this.$toast.error(e.response.data.message, {
+                position: "bottom-right",
+              });
+            }
+          });
+      } else {
+        this.$toast.error("Debe llenar los campos obligatorios", {
+          position: "bottom-right",
+        });
+      }
+    }
   },
 };

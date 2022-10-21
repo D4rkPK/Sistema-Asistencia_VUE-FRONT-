@@ -11,13 +11,13 @@ export default {
       universidad: {
         id: null,
         abreviatura: '',
-        nombre: '',
+        nombre_universidad: '',
 
       },
       default_universidad: {
         id: null,
         abreviatura: '',
-        nombre: '',
+        nombre_universidad: '',
       },
       itemUsuarios: [],
       headers: [
@@ -92,7 +92,7 @@ export default {
         console.log("Editar universidads");
         this.universidad.id = this.item.id;
         this.universidad.abreviatura = this.item.abreviatura;
-        this.universidad.nombre = this.item.nombre_universidad;
+        this.universidad.nombre_universidad = this.item.nombre_universidad;
       } catch (error) {
         this.$toast.error('Ocurrio un error al intentar obtener al universidades', { position: "bottom-right" });
       }

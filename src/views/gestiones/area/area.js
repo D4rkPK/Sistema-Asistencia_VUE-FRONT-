@@ -10,13 +10,11 @@ export default {
       search: "",
       area: {
         id: null,
-        descripcion: '',
-        user_id: '',
+        descripcion_area: '',
       },
       default_area: {
         id: null,
-        descripcion: '',
-        user_id: '',
+        descripcion_area: '',
       },
       itemEncargados: [],
       headers: [
@@ -25,12 +23,6 @@ export default {
           align: 'center',
           sortable: true,
           value: 'descripcion_area',
-        },
-        {
-          text: 'Encargado',
-          align: 'center',
-          sortable: true,
-          value: 'encargado.nombre',
         },
         {
           text: 'Acciones',
@@ -105,8 +97,7 @@ export default {
       try {
         console.log("Editar areas");
         this.area.id = this.item.id;
-        this.area.descripcion = this.item.descripcion;
-        this.area.user_id = parseInt(this.item.user_id);
+        this.area.descripcion_area = this.item.descripcion_area;
       } catch (error) {
         this.$toast.error('Ocurrio un error al intentar obtener el area', { position: "bottom-right" });
       }

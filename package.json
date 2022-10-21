@@ -26,6 +26,7 @@
     "vue-router": "^3.5.1",
     "vue-toastification": "^1.7.14",
     "vuetify": "^2.6.0",
+    "vuetify-more-component": "^1.1.1",
     "vuex": "^3.6.2",
     "xlsx": "^0.18.0"
   },

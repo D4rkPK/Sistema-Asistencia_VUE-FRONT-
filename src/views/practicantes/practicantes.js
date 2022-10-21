@@ -91,12 +91,6 @@ export default {
           value: 'huella',
         },
         {
-          text: 'Horario',
-          align: 'center',
-          sortable: false,
-          value: 'id',
-        },
-        {
           text: 'Acciones',
           align: 'center',
           sortable: false,
@@ -264,8 +258,10 @@ export default {
       if (this.$refs.form.validate()) {
         this.loading = true;
         console.log(this.estudiante, "DATOS EDITADOS");
-        await this.$store.state.services.practicantesService.actualizar(this.estudiante, this.estudiante.id)
+        await this.$store.state.services.practicantesService.actualizar({estudiante: this.estudiante, horario: this.horario_id}, this.estudiante.id,)
           .then(async () => {
+            await this.$store.state.services.horarioAsignadoService.actualizar({estudiante: this.estudiante.cui, horario: this.horario_id})
+            .then(async () => {
             this.loading = false;
             this.$toast.success('Datos actualizados con éxito', { position: "top-right" });
             this.closeDialog();
@@ -277,6 +273,12 @@ export default {
               this.$toast.error(e.response.data.message, { position: 'top-right' });
             }
           });
+        }).catch((e) => {
+          this.loading = false;
+          if (e.response) {
+            this.$toast.error(e.response.data.message, { position: 'top-right' });
+          }
+        });
       } else {
         this.$toast.error("Debe llenar los campos obligatorios", { position: 'top-right' })
       }
@@ -310,6 +312,7 @@ export default {
       this.$refs.form.resetValidation();
       this.estudiante = Object.assign(this.estudiante, this.default_estudiante);
       this.dialog = false;
+      this.horario_id = null;
     },
     
     async FingerprintSdk(item) {

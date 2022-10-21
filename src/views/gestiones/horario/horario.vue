@@ -102,245 +102,64 @@
                 </v-col>
                 <v-col cols="12" sm="4" md="4">
                   <v-menu
-                    ref="time1"
-                    v-model="time1"
+                    ref="menu"
+                    v-model="menu"
                     :close-on-content-click="false"
                     :nudge-right="40"
-                    :return-value.sync="time1"
                     transition="scale-transition"
                     offset-y
-                    max-width="200px"
-                    min-width="200px"
+                    max-width="290px"
+                    min-width="290px"
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <v-text-field
                         v-model="horario.hora_entrada"
-                        label="Seleccione Hora de Entrada*"
+                        label="Seleccione hora de entrada"
+                        required
+                        :rules="[rules.required]"
                         prepend-icon="mdi-clock-time-four-outline"
                         readonly
                         v-bind="attrs"
                         v-on="on"
                       ></v-text-field>
                     </template>
-                    <v-card 
-                    >
-                      <v-card-title class="primary white--text"
-                        >Seleccionar Hora</v-card-title
-                      >
-                      <v-card-text class="pt-4">
-                        <v-layout justify-center align-center>
-                          <v-layout
-                            align-center
-                            justify-center
-                            style="max-width: 100px"
-                          >
-                            <v-layout column align-center>
-                              <v-btn
-                                icon
-                                class="my-0"
-                                style="position: relative; bottom: 4px"
-                                @click="onAddHourClicked"
-                              >
-                                <v-icon large>keyboard_arrow_up</v-icon>
-                              </v-btn>
-                              <v-text-field
-                                v-model="hourModel"
-                                style="width: 40px"
-                                class="pt-0 my-0 no-underline centered-input"
-                                type="number"
-                                hide-spin-buttons
-                                :min="minHour"
-                                :max="maxHour"
-                                step="1"
-                                required
-                                hide-details
-                              ></v-text-field>
-                              <v-btn
-                                icon
-                                class="my-0"
-                                style="position: relative; top: 8px"
-                                @click="onSubtractHourClicked"
-                              >
-                                <v-icon large>keyboard_arrow_down</v-icon>
-                              </v-btn>
-                            </v-layout>
-
-                            <div
-                              class="grey--text"
-                              style="
-                                font-size: 18px;
-                                position: relative;
-                                bottom: 2px;
-                              "
-                            >
-                              :
-                            </div>
-                            <v-layout align-center>
-                              <v-layout column align-center>
-                                <v-btn
-                                  icon
-                                  class="my-0"
-                                  style="position: relative; bottom: 4px"
-                                  @click="onAddMinuteClicked"
-                                >
-                                  <v-icon large>keyboard_arrow_up</v-icon>
-                                </v-btn>
-                                <v-text-field
-                                  v-model="minuteModel"
-                                  style="width: 40px"
-                                  class="pt-0 my-0 no-underline centered-input"
-                                  type="number"
-                                  hide-spin-buttons
-                                  :min="minMinute"
-                                  :max="maxMinute"
-                                  step="1"
-                                  required
-                                  hide-details
-                                ></v-text-field>
-                                <v-btn
-                                  icon
-                                  class="my-0"
-                                  style="position: relative; top: 8px"
-                                  @click="onSubtractMinuteClicked"
-                                >
-                                  <v-icon large>keyboard_arrow_down</v-icon>
-                                </v-btn>
-                              </v-layout>
-                            </v-layout>
-                          </v-layout>
-                        </v-layout>
-                      </v-card-text>
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="primary" text @click="time1 = false"
-                          >Cerrar</v-btn
-                        >
-                        <v-btn color="primary" text @click="saveTime(1)" 
-                          >Aceptar</v-btn
-                        >
-                      </v-card-actions>
-                    </v-card>
+                    <digitalTimePicker
+                      v-model="horario.hora_entrada"
+                      :TitleName="'Hora de entrada'"
+                      :Hour="'HORA'"
+                      :Minute="'MIN'"
+                    ></digitalTimePicker>
                   </v-menu>
                 </v-col>
                 <v-col cols="12" sm="4" md="4">
                   <v-menu
-                    ref="time2"
-                    v-model="time2"
+                    ref="menu"
+                    v-model="menu2"
                     :close-on-content-click="false"
                     :nudge-right="40"
-                    :return-value.sync="time2"
                     transition="scale-transition"
                     offset-y
-                    max-width="200px"
-                    min-width="200px"
+                    max-width="290px"
+                    min-width="290px"
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <v-text-field
                         v-model="horario.hora_salida"
-                        label="Seleccione Hora de Salida*"
+                        label="Seleccione hora de salida"
+                        required
+                        :rules="[rules.required, rules.hora_salida]"
                         prepend-icon="mdi-clock-time-four-outline"
                         readonly
                         v-bind="attrs"
                         v-on="on"
                       ></v-text-field>
                     </template>
-                    <v-card>
-                      <v-card-title class="primary white--text"
-                        >Seleccionar Hora</v-card-title
-                      >
-                      <v-card-text class="pt-4">
-                        <v-layout justify-center align-center>
-                          <v-layout
-                            align-center
-                            justify-center
-                            style="max-width: 100px"
-                          >
-                            <v-layout column align-center>
-                              <v-btn
-                                icon
-                                class="my-0"
-                                style="position: relative; bottom: 4px"
-                                @click="onAddHourClicked"
-                              >
-                                <v-icon large>keyboard_arrow_up</v-icon>
-                              </v-btn>
-                              <v-text-field
-                                v-model="hourModel"
-                                style="width: 40px"
-                                class="pt-0 my-0 no-underline centered-input"
-                                type="number"
-                                hide-spin-buttons
-                                :min="minHour"
-                                :max="maxHour"
-                                step="1"
-                                required
-                                hide-details
-                              ></v-text-field>
-                              <v-btn
-                                icon
-                                class="my-0"
-                                style="position: relative; top: 8px"
-                                @click="onSubtractHourClicked"
-                              >
-                                <v-icon large>keyboard_arrow_down</v-icon>
-                              </v-btn>
-                            </v-layout>
-
-                            <div
-                              class="grey--text"
-                              style="
-                                font-size: 18px;
-                                position: relative;
-                                bottom: 2px;
-                              "
-                            >
-                              :
-                            </div>
-                            <v-layout align-center>
-                              <v-layout column align-center>
-                                <v-btn
-                                  icon
-                                  class="my-0"
-                                  style="position: relative; bottom: 4px"
-                                  @click="onAddMinuteClicked"
-                                >
-                                  <v-icon large>keyboard_arrow_up</v-icon>
-                                </v-btn>
-                                <v-text-field
-                                  v-model="minuteModel"
-                                  style="width: 40px"
-                                  class="pt-0 my-0 no-underline centered-input"
-                                  type="number"
-                                  hide-spin-buttons
-                                  :min="minMinute"
-                                  :max="maxMinute"
-                                  step="1"
-                                  required
-                                  hide-details
-                                ></v-text-field>
-                                <v-btn
-                                  icon
-                                  class="my-0"
-                                  style="position: relative; top: 8px"
-                                  @click="onSubtractMinuteClicked"
-                                >
-                                  <v-icon large>keyboard_arrow_down</v-icon>
-                                </v-btn>
-                              </v-layout>
-                            </v-layout>
-                          </v-layout>
-                        </v-layout>
-                      </v-card-text>
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="primary" text @click="time1 = false"
-                          >Cancelar</v-btn
-                        >
-                        <v-btn color="primary" text @click="saveTime(2)" 
-                          >Aceptar</v-btn
-                        >
-                      </v-card-actions>
-                    </v-card>
+                    <digitalTimePicker
+                      v-model="horario.hora_salida"
+                      :TitleName="'Hora de salida'"
+                      :Hour="'HORA'"
+                      :Minute="'MIN'"
+                    ></digitalTimePicker>
                   </v-menu>
                 </v-col>
               </v-row>
@@ -349,7 +168,7 @@
         </v-form>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">
+          <v-btn color="blue darken-1" text @click="closeDialog()">
             Cerrar
           </v-btn>
           <v-btn
@@ -379,9 +198,9 @@
           Esta seguro que desea eliminar este horario
         </v-card-title>
         <v-card-text v-if="item != null">
-          <strong>CUI:</strong>{{ item.cui }} <br />
-          <strong>Nombre:</strong>{{ item.primer_nombre }} <br />
-          <strong>Apellido:</strong>{{ item.primer_apellido }} <br />
+          <strong>Nombre:</strong>{{ item.descripcion }} <br />
+          <strong>Hora de entrada:</strong>{{ item.hora_entrada }} <br />
+          <strong>Hora de salida:</strong>{{ item.hora_salida }} <br />
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -398,4 +217,3 @@
 </template>
 
 <script src="./horario.js"></script>
-<style scoped src="./horario.css"></style>

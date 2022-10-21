@@ -101,7 +101,7 @@
                 </v-col>
                 <v-col cols="12" sm="6" md="8">
                   <v-text-field
-                    v-model="universidad.nombre"
+                    v-model="universidad.nombre_universidad"
                     :rules="[rules.required]"
                     label="Nombre*"
                   ></v-text-field>
@@ -143,7 +143,7 @@
         </v-card-title>
         <v-card-text v-if="item != null">
           <strong>Abreviatura: </strong>{{ item.abreviatura }} <br />
-          <strong>Nombre: </strong>{{ item.nombre }}
+          <strong>Nombre: </strong>{{ item.nombre_universidad }}
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
